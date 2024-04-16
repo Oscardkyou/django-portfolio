@@ -1,5 +1,7 @@
 # Portfolio Django
 
+![Снимок экрана](img/adk.png)
+
 Проект "Portfolio Django" представляет собой портфолио Backend Developer'a, который специализируется на разработке с использованием Go, Python и фреймворка Django.
 
 ## Установка
