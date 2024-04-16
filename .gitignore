@@ -1,0 +1,26 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Исключить файлы миграций Django
+**/migrations/
+
+# Исключить файлы сборки
+node_modules/
+*.env
+
+# Игнорировать файлы настроек Django, если они не содержат конфиденциальных данных
+#myproject/myapp/settings.py
+
+# Ваши собственные временные или локальные файлы
+*.swp
+.DS_Store
+
+# Виртуальное окружение
+venv/
+env/
+virtualenv/
+
+# База данных
+db.sqlite3
