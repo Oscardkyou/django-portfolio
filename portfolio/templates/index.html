@@ -1,12 +1,47 @@
 {% extends 'base.html' %}
 {% block title %}Работы, виды услуг и отзывы{% endblock %}
 {% block content %}
+<section class="section hero-section">
+   <div class="container">
+      <div class="row align-items-center">
+         <div class="col-lg-7" data-aos="fade-up">
+            <p class="hero-eyebrow">Backend developer</p>
+            <h1 class="hero-title">Аскаров Даурен</h1>
+            <p class="hero-subtitle">Разрабатываю надежные backend-системы на Go и Python, автоматизирую бизнес-процессы и подключаю внешние сервисы.</p>
+            <div class="hero-tags">
+               <span>Go</span>
+               <span>Python</span>
+               <span>Django</span>
+               <span>PostgreSQL</span>
+            </div>
+            <div class="hero-cta">
+               <a class="btn btn-primary hero-button" href="{% url 'contact' %}">Обсудить проект</a>
+               <a class="btn btn-outline-dark hero-button" href="{% url 'about' %}">Подробнее обо мне</a>
+            </div>
+         </div>
+         <div class="col-lg-5 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="150">
+            <div class="hero-card">
+               <h3 class="h3 mb-3">Чем могу помочь</h3>
+               <ul class="list-unstyled hero-list">
+                  <li><span class='bx bx-check'></span>Проектирование API и интеграции</li>
+                  <li><span class='bx bx-check'></span>Автоматизация процессов и бот-платформ</li>
+                  <li><span class='bx bx-check'></span>Поддержка и развитие существующих систем</li>
+               </ul>
+               <div class="hero-card-footer">
+                  <p class="mb-1">Доступен для новых проектов</p>
+                  <a class="link-dark fw-semibold" href="{% url 'contact' %}">Напишите мне</a>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
 <section class="section site-portfolio">
    <div class="container">
       <div class="row mb-5 align-items-center">
          <div class="col-md-12 col-lg-6 mb-4 mb-lg-0" data-aos="fade-up">
-            <h2>Аскаров Даурен</h2>
-            <p class="mb-0">Backend Developer на Go, Python, Django</p>
+            <h2>Проекты и кейсы</h2>
+            <p class="mb-0">Несколько примеров работ: от API до полноценных веб-сервисов.</p>
          </div>
          <div class="col-md-12 col-lg-6 text-start text-lg-end" data-aos="fade-up" data-aos-delay="100">
             <div id="filters" class="filters">

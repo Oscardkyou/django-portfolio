@@ -6,7 +6,7 @@
       <div class="row mb-5 align-items-end">
          <div class="col-md-6" data-aos="fade-up">
             <h2>Обо мне</h2>
-            <p class="mb-0">Привет, я &ndash; backend developer {{ author.name }} {{ author.lastname }}.</p>
+            <p class="mb-0">Привет, я &ndash; backend developer {{ author.name }} {{ author.lastname }}. Помогаю командам запускать и развивать надежные сервисы.</p>
          </div>
       </div>
       <div class="row">
@@ -29,6 +29,20 @@
          <div class="col-md-7 mb-5 mb-md-0" data-aos="fade-up">
             <p><img src="{{ author.image.url }}" alt="Image" class="img-fluid"></p>
             <p>{{ author.about|safe }}</p>
+            <div class="about-grid">
+               <div class="about-card">
+                  <h4>Фокус</h4>
+                  <p>API, интеграции, оптимизация баз данных и автоматизация бизнес-процессов.</p>
+               </div>
+               <div class="about-card">
+                  <h4>Подход</h4>
+                  <p>Сначала разбираюсь в задаче, затем предлагаю техническое решение и прозрачный план работ.</p>
+               </div>
+               <div class="about-card">
+                  <h4>Коммуникация</h4>
+                  <p>Регулярные статусы, понятные сроки и документация по ключевым решениям.</p>
+               </div>
+            </div>
             <p><a href="{% url 'contact' %}" class="readmore">Напишите мне</a></p>
          </div>
       </div>
