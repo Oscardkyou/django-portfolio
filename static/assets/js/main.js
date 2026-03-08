@@ -31,6 +31,79 @@
     });
   }
 
+  const chatInput = document.getElementById('ai-chat-input');
+  const chatSubmit = document.getElementById('ai-chat-submit');
+  const chatOutput = document.getElementById('ai-chat-output');
+  const experimentsLoad = document.getElementById('ai-experiments-load');
+  const experimentsOutput = document.getElementById('ai-experiments-output');
+  const predictSubmit = document.getElementById('ai-predict-submit');
+  const predictOutput = document.getElementById('ai-predict-output');
+  const predictTeamSize = document.getElementById('predict-team-size');
+  const predictDuration = document.getElementById('predict-duration');
+  const predictAiFeatures = document.getElementById('predict-ai-features');
+
+  if (chatSubmit && chatInput && chatOutput) {
+    chatSubmit.addEventListener('click', async () => {
+      const message = chatInput.value.trim();
+      if (!message) {
+        chatOutput.textContent = 'Enter a question first.';
+        return;
+      }
+
+      chatOutput.textContent = 'Loading...';
+      const response = await fetch(chatSubmit.dataset.endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message }),
+      });
+      const data = await response.json();
+      chatOutput.textContent = data.answer || data.detail || 'No response received.';
+    });
+  }
+
+  if (experimentsLoad && experimentsOutput) {
+    experimentsLoad.addEventListener('click', async () => {
+      experimentsOutput.textContent = 'Loading...';
+      const response = await fetch(experimentsLoad.dataset.endpoint);
+      const data = await response.json();
+      const experiments = data.experiments || [];
+      if (!experiments.length) {
+        experimentsOutput.textContent = 'No experiments found.';
+        return;
+      }
+      experimentsOutput.innerHTML = experiments.map((item) => (
+        `<div class="ai-demo-item"><strong>${item.name}</strong><br>Accuracy: ${item.accuracy}<br>Version: ${item.model_version}<br>Stage: ${item.stage}</div>`
+      )).join('');
+    });
+  }
+
+  if (predictSubmit && predictOutput && predictTeamSize && predictDuration && predictAiFeatures) {
+    predictSubmit.addEventListener('click', async () => {
+      predictOutput.textContent = 'Loading...';
+      const payload = {
+        team_size: Number(predictTeamSize.value),
+        duration_months: Number(predictDuration.value),
+        ai_features: Boolean(predictAiFeatures.checked),
+      };
+
+      const response = await fetch(predictSubmit.dataset.endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        predictOutput.textContent = data.detail || 'Prediction failed.';
+        return;
+      }
+      predictOutput.innerHTML = `Complexity score: <strong>${data.complexity_score}</strong><br>Risk level: <strong>${data.risk_level}</strong><br>Recommended team: <strong>${data.recommended_team}</strong>`;
+    });
+  }
+
 
   const select = (el, all = false) => {
     el = el.trim()
