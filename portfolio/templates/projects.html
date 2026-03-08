@@ -7,10 +7,10 @@
          <div class="col-lg-7" data-aos="fade-up">
             <p class="hero-eyebrow">Project highlights</p>
             <h1 class="hero-title">Projects</h1>
-            <p class="hero-subtitle">Deep-dive case studies with architecture, performance, and AI integration outcomes.</p>
+            <p class="hero-subtitle">Selected backend and AI projects presented as engineering cases: task, implementation, architecture, stack, and measurable outcomes.</p>
             <div class="hero-cta">
                <a class="btn btn-primary hero-button" href="{{ resume_url }}" target="_blank" rel="noopener">Download Resume</a>
-               <a class="btn btn-outline-light hero-button" href="{% url 'contact' %}">Start a project</a>
+               <a class="btn btn-outline-light hero-button" href="{% url 'contact' %}">Contact</a>
             </div>
          </div>
          <div class="col-lg-5 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="150">
@@ -19,8 +19,9 @@
                {% if featured_project %}
                <p class="mb-1 fw-semibold">{{ featured_project.title }}</p>
                <p class="text-muted">{{ featured_project.summary }}</p>
+               <p class="mb-0">{{ author_data.availability }}</p>
                {% else %}
-               <p class="mb-0">Add projects in Django admin to feature them here.</p>
+               <p class="mb-0">Key case studies will appear here.</p>
                {% endif %}
             </div>
          </div>
@@ -38,6 +39,8 @@
                   <div class="col-lg-7">
                      <h3>{{ project.title }}</h3>
                      <p class="text-muted">{{ project.summary }}</p>
+                     <p><strong>Task:</strong> {{ project.problem }}</p>
+                     <p><strong>What I did:</strong> {{ project.role }}</p>
                      <p>{{ project.description }}</p>
                      <div class="stack-chips">
                         {% for item in project.stack %}
@@ -49,6 +52,7 @@
                         {% if project.link %}
                         <a href="{{ project.link }}" target="_blank" rel="noopener">Live demo</a>
                         {% endif %}
+                        <a href="{% url 'case_studies' %}">Case Studies</a>
                      </div>
                   </div>
                   <div class="col-lg-5">

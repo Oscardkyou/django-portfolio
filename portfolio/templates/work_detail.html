@@ -8,6 +8,12 @@
             <p class="hero-eyebrow">Case Study</p>
             <h1 class="hero-title">{{ work.title }}</h1>
             <p class="hero-subtitle">{{ summary_text }}</p>
+            {% if work.problem %}
+            <p class="text-muted mb-2"><strong>Task:</strong> {{ work.problem }}</p>
+            {% endif %}
+            {% if work.role %}
+            <p class="text-muted"><strong>What I did:</strong> {{ work.role }}</p>
+            {% endif %}
             <div class="stack-chips">
                {% for item in stack_items %}
                <span>{{ item }}</span>

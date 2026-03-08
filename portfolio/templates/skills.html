@@ -7,7 +7,7 @@
          <div class="col-lg-7" data-aos="fade-up">
             <p class="hero-eyebrow">Skill map</p>
             <h1 class="hero-title">Skills</h1>
-            <p class="hero-subtitle">Recruiter-friendly overview of backend, AI, database, and cloud capabilities.</p>
+            <p class="hero-subtitle">Structured engineering skill map covering backend, data, cloud, AI, DevOps, and testing.</p>
             <div class="hero-cta">
                <a class="btn btn-primary hero-button" href="{% url 'projects' %}">View Projects</a>
                <a class="btn btn-outline-light hero-button" href="{{ resume_url }}" target="_blank" rel="noopener">Download Resume</a>
@@ -16,7 +16,7 @@
          <div class="col-lg-5 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="150">
             <div class="hero-card">
                <h3 class="h3 mb-3">Tech focus</h3>
-               <p class="mb-0">Async backend, AI pipelines, system reliability, and cloud-native delivery.</p>
+               <p class="mb-0">{{ author_data.hero_strengths }}</p>
             </div>
          </div>
       </div>

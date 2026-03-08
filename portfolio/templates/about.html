@@ -5,13 +5,14 @@
    <div class="container">
       <div class="row align-items-center">
          <div class="col-lg-7" data-aos="fade-up">
-            <p class="hero-eyebrow">Developer Portfolio</p>
+            <p class="hero-eyebrow">Backend / AI Engineer</p>
             <h1 class="hero-title">{{ author_data.full_name }}</h1>
             <p class="hero-subtitle">{{ author_data.title }}</p>
             <p class="text-muted">{{ author_data.location }}</p>
             <div class="hero-cta">
                <a class="btn btn-primary hero-button" href="mailto:{{ author_data.email }}">Email me</a>
                <a class="btn btn-outline-dark hero-button" href="{{ author_data.telegram }}" target="_blank" rel="noopener">Telegram</a>
+               <a class="btn btn-outline-dark hero-button" href="{{ resume_url }}" target="_blank" rel="noopener">Download Resume</a>
             </div>
          </div>
          <div class="col-lg-5 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="150">
@@ -19,7 +20,7 @@
                <h3 class="h3 mb-3">About</h3>
                <p class="mb-3">{{ author_data.bio }}</p>
                <div class="hero-card-footer">
-                  <p class="mb-1">Currently open for AI and backend projects</p>
+                  <p class="mb-1">{{ author_data.availability }}</p>
                   <a class="link-dark fw-semibold" href="{{ author_data.github }}" target="_blank" rel="noopener">GitHub profile</a>
                </div>
             </div>
@@ -33,7 +34,7 @@
       <div class="row g-4">
          <div class="col-lg-7" data-aos="fade-up">
             <h2>About</h2>
-            <p class="mb-4">{{ author_data.bio }}</p>
+            <p class="mb-4">{{ author_data.hero_summary }}</p>
             <div class="about-grid">
                <div class="about-card">
                   <h4>Focus areas</h4>
@@ -50,6 +51,10 @@
                <div class="about-card">
                   <h4>Role</h4>
                   <p>{{ author_data.title }}</p>
+               </div>
+               <div class="about-card">
+                  <h4>Availability</h4>
+                  <p>{{ author_data.availability }}</p>
                </div>
             </div>
          </div>

@@ -7,9 +7,10 @@
          <div class="col-lg-7" data-aos="fade-up">
             <p class="hero-eyebrow">Let’s build</p>
             <h1 class="hero-title">Contact</h1>
-            <p class="hero-subtitle">Open for AI integrations, backend architecture, and fast delivery projects.</p>
+            <p class="hero-subtitle">Open for backend engineering, AI integration, and remote product development opportunities.</p>
             <div class="hero-cta">
                <a class="btn btn-primary hero-button" href="mailto:{{ author_data.email }}">Email</a>
+               <a class="btn btn-outline-light hero-button" href="{{ author_data.telegram }}" target="_blank" rel="noopener">Telegram</a>
                <a class="btn btn-outline-light hero-button" href="{{ resume_url }}" target="_blank" rel="noopener">Download Resume</a>
             </div>
          </div>
@@ -32,7 +33,7 @@
                </ul>
                <div class="contact-note">
                   <p class="mb-1">Response within 24 hours.</p>
-                  <p class="mb-0">Almaty, Kazakhstan · Remote friendly</p>
+                  <p class="mb-0">{{ author_data.location }} · Remote friendly</p>
                </div>
             </div>
          </div>
@@ -74,7 +75,7 @@
          <div class="col-lg-5 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="150">
             <div class="project-card">
                <h4>Availability</h4>
-               <p class="text-muted">Available for new backend / AI projects in Q2.</p>
+               <p class="text-muted">{{ author_data.availability }}</p>
                <div class="stack-chips">
                   <span>AI Systems</span>
                   <span>RAG Pipelines</span>
@@ -84,9 +85,10 @@
             </div>
             <div class="project-card">
                <h4>API demo</h4>
-               <p class="text-muted">Showcase JSON endpoints.</p>
+               <p class="text-muted">Showcase JSON endpoints for portfolio content and backend extensions.</p>
                <a class="link-light" href="{% url 'api_projects' %}">/api/projects</a><br>
-               <a class="link-light" href="{% url 'api_skills' %}">/api/skills</a>
+               <a class="link-light" href="{% url 'api_skills' %}">/api/skills</a><br>
+               <a class="link-light" href="{% url 'api_case_studies' %}">/api/case-studies</a>
             </div>
          </div>
       </div>

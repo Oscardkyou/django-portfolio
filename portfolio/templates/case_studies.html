@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}Case Studies{% endblock %}
+{% block content %}
+<section class="section hero-section">
+   <div class="container">
+      <div class="row align-items-center">
+         <div class="col-lg-7" data-aos="fade-up">
+            <p class="hero-eyebrow">Engineering breakdowns</p>
+            <h1 class="hero-title">Case Studies</h1>
+            <p class="hero-subtitle">Detailed breakdowns of backend and AI systems: problem, solution, architecture, stack, and measurable results.</p>
+            <div class="hero-cta">
+               <a class="btn btn-primary hero-button" href="{% url 'projects' %}">View Projects</a>
+               <a class="btn btn-outline-light hero-button" href="{{ resume_url }}" target="_blank" rel="noopener">Download Resume</a>
+            </div>
+         </div>
+         <div class="col-lg-5 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="150">
+            <div class="hero-card">
+               <h3 class="h3 mb-3">Why this matters</h3>
+               <p class="mb-3">These case studies show not just what was built, but how the backend was designed, what constraints existed, and what results were achieved.</p>
+               <p class="mb-0">{{ author_data.availability }}</p>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+<section class="section pb-5">
+   <div class="container">
+      <div class="row g-4">
+         {% for case_study in case_studies %}
+         <div class="col-12">
+            <div class="project-card project-card-wide">
+               <div class="row g-4">
+                  <div class="col-lg-7">
+                     <p class="hero-eyebrow mb-2">Case Study</p>
+                     <h3>{{ case_study.title }}</h3>
+                     <div class="project-card mt-4">
+                        <h4>Problem</h4>
+                        <p>{{ case_study.problem }}</p>
+                     </div>
+                     <div class="project-card mt-4">
+                        <h4>Solution</h4>
+                        <p>{{ case_study.solution }}</p>
+                     </div>
+                     <div class="stack-chips mt-4">
+                        {% for item in case_study.stack %}
+                        <span>{{ item }}</span>
+                        {% endfor %}
+                     </div>
+                     <div class="project-links mt-4">
+                        <a href="{{ case_study.github_link }}" target="_blank" rel="noopener">GitHub</a>
+                        {% if case_study.demo_link %}
+                        <a href="{{ case_study.demo_link }}" target="_blank" rel="noopener">Live demo</a>
+                        {% endif %}
+                     </div>
+                  </div>
+                  <div class="col-lg-5">
+                     <div class="architecture-diagram">
+                        <h4>Architecture</h4>
+                        <pre>
+{% for layer in case_study.architecture %}{{ layer }}
+{% if not forloop.last %}↓
+{% endif %}{% endfor %}</pre>
+                     </div>
+                     <div class="metric-card mt-4">
+                        <h4>Results</h4>
+                        <ul class="list-unstyled mb-0">
+                           {% for metric in case_study.metrics %}
+                           <li><span class='bx bx-check'></span> {{ metric }}</li>
+                           {% endfor %}
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         {% endfor %}
+      </div>
+   </div>
+</section>
+{% endblock %}
