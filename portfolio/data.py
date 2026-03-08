@@ -1,26 +1,26 @@
 AUTHOR = {
-    "full_name": {"en": "Dauren Askarov", "kz": "Дәурен Асқаров"},
-    "name": {"en": "Dauren", "kz": "Дәурен"},
-    "lastname": {"en": "Askarov", "kz": "Асқаров"},
-    "title": {"en": "Python Backend Engineer | AI Integration", "kz": "Python Backend Engineer | AI Integration"},
-    "location": {"en": "Almaty, Kazakhstan", "kz": "Алматы, Қазақстан"},
+    "full_name": {"en": "Dauren Askarov", "ru": "Даурен Аскаров"},
+    "name": {"en": "Dauren", "ru": "Даурен"},
+    "lastname": {"en": "Askarov", "ru": "Аскаров"},
+    "title": {"en": "Python Backend Engineer | AI Integration", "ru": "Python Backend Engineer | AI Integration"},
+    "location": {"en": "Almaty, Kazakhstan", "ru": "Алматы, Казахстан"},
     "bio": {
         "en": (
             "Python backend engineer focused on AI integration, scalable APIs, and "
             "production-grade systems for data-intensive products."
         ),
-        "kz": (
-            "AI интеграция, масштабталатын API және production деңгейіндегі жүйелерге "
-            "бағытталған Python backend инженері."
+        "ru": (
+            "Python backend инженер с фокусом на AI-интеграции, масштабируемых API "
+            "и production-grade системах для data-intensive продуктов."
         ),
     },
     "hero_summary": {
         "en": "I build scalable APIs, AI-enabled backend systems, and real-time platforms.",
-        "kz": "Мен масштабталатын API, AI қосылған backend жүйелерін және real-time платформаларды жасаймын.",
+        "ru": "Я создаю масштабируемые API, backend-системы с AI и real-time платформы.",
     },
     "hero_strengths": {
         "en": "Python, FastAPI, Django, Docker, AWS, RAG, and async backend systems.",
-        "kz": "Python, FastAPI, Django, Docker, AWS, RAG және async backend жүйелері.",
+        "ru": "Python, FastAPI, Django, Docker, AWS, RAG и асинхронные backend-системы.",
     },
     "email": "dauren2050@yandex.ru",
     "telegram": "https://t.me/DK_Oscar",
@@ -28,23 +28,54 @@ AUTHOR = {
     "linkedin": "",
     "availability": {
         "en": "Available for remote backend and AI engineering opportunities.",
-        "kz": "Қашықтан backend және AI engineering мүмкіндіктеріне ашықпын.",
+        "ru": "Открыт к удалённым возможностям в backend и AI engineering.",
     },
-    "resume_label": {"en": "Download Resume", "kz": "Резюмені жүктеу"},
-    "cta_primary": {"en": "View Projects", "kz": "Жобаларды көру"},
-    "cta_secondary": {"en": "Contact", "kz": "Байланыс"},
+    "resume_label": {"en": "Download Resume", "ru": "Скачать резюме"},
+    "cta_primary": {"en": "View Projects", "ru": "Смотреть проекты"},
+    "cta_secondary": {"en": "Contact", "ru": "Контакты"},
     "focus_areas": [
-        {"en": "Backend architecture for AI products", "kz": "AI өнімдеріне арналған backend архитектура"},
-        {"en": "RAG pipelines and LLM integration", "kz": "RAG pipeline және LLM интеграциясы"},
-        {"en": "High-performance API development", "kz": "Жоғары өнімді API әзірлеу"},
-        {"en": "Cloud-native delivery and observability", "kz": "Cloud-native жеткізу және observability"},
+        {"en": "Backend architecture for AI products", "ru": "Backend-архитектура для AI-продуктов"},
+        {"en": "RAG pipelines and LLM integration", "ru": "RAG-пайплайны и интеграция LLM"},
+        {"en": "High-performance API development", "ru": "Разработка высокопроизводительных API"},
+        {"en": "Cloud-native delivery and observability", "ru": "Cloud-native delivery и observability"},
     ],
     "proof_points": [
-        {"en": "3 backend / AI case studies", "kz": "3 backend / AI case study"},
-        {"en": "API-ready portfolio", "kz": "API-ready портфолио"},
-        {"en": "Remote-friendly collaboration", "kz": "Қашықтан жұмысқа ыңғайлы"},
-        {"en": "FastAPI, Django, Docker, AWS", "kz": "FastAPI, Django, Docker, AWS"},
+        {"en": "3 backend / AI case studies", "ru": "3 backend / AI case study"},
+        {"en": "API-ready portfolio", "ru": "API-ready портфолио"},
+        {"en": "Remote-friendly collaboration", "ru": "Подходит для удалённого сотрудничества"},
+        {"en": "FastAPI, Django, Docker, AWS", "ru": "FastAPI, Django, Docker, AWS"},
     ],
+}
+
+UI_TEXT = {
+    "nav_home": {"en": "Home", "ru": "Главная"},
+    "nav_about": {"en": "About", "ru": "Обо мне"},
+    "nav_projects": {"en": "Projects", "ru": "Проекты"},
+    "nav_case_studies": {"en": "Case Studies", "ru": "Кейсы"},
+    "nav_skills": {"en": "Skills", "ru": "Навыки"},
+    "nav_contact": {"en": "Contact", "ru": "Контакты"},
+    "theme_light": {"en": "Light", "ru": "Светлая"},
+    "theme_dark": {"en": "Dark", "ru": "Тёмная"},
+    "hero_projects": {"en": "Projects", "ru": "Проекты"},
+    "hero_contact": {"en": "Contact", "ru": "Контакты"},
+    "featured_project": {"en": "Featured Project", "ru": "Избранный проект"},
+    "see_full_case": {"en": "See full case study", "ru": "Смотреть полный кейс"},
+    "projects_heading": {"en": "Projects", "ru": "Проекты"},
+    "skills_heading": {"en": "Skills", "ru": "Навыки"},
+    "performance_heading": {"en": "Performance", "ru": "Результаты"},
+    "backend_highlights": {"en": "Backend Portfolio Highlights", "ru": "Сильные стороны backend-портфолио"},
+    "task_label": {"en": "Task", "ru": "Задача"},
+    "contribution_label": {"en": "My contribution", "ru": "Мой вклад"},
+    "results_label": {"en": "Results", "ru": "Результаты"},
+    "architecture_label": {"en": "Architecture", "ru": "Архитектура"},
+    "problem_label": {"en": "Problem", "ru": "Проблема"},
+    "solution_label": {"en": "Solution", "ru": "Решение"},
+    "contact_details": {"en": "Contact details", "ru": "Контакты"},
+    "send_message": {"en": "Send a message", "ru": "Отправить сообщение"},
+    "email_label": {"en": "Email", "ru": "Email"},
+    "telegram_label": {"en": "Telegram", "ru": "Telegram"},
+    "github_label": {"en": "GitHub", "ru": "GitHub"},
+    "availability_label": {"en": "Availability", "ru": "Доступность"},
 }
 
 PROJECTS = [

@@ -2,6 +2,35 @@
 (function() {
   "use strict";
 
+  const rootBody = document.body;
+  const themeToggle = document.getElementById('theme-toggle');
+  const savedTheme = localStorage.getItem('site-theme');
+  const preferredTheme = savedTheme === 'theme-light' ? 'theme-light' : 'theme-dark';
+
+  if (rootBody) {
+    rootBody.classList.remove('theme-dark', 'theme-light');
+    rootBody.classList.add(preferredTheme);
+  }
+
+  const syncThemeToggleLabel = () => {
+    if (!themeToggle) {
+      return;
+    }
+    const currentIsDark = rootBody.classList.contains('theme-dark');
+    themeToggle.textContent = currentIsDark ? themeToggle.dataset.lightLabel : themeToggle.dataset.darkLabel;
+  };
+
+  if (themeToggle && rootBody) {
+    syncThemeToggleLabel();
+    themeToggle.addEventListener('click', () => {
+      const nextTheme = rootBody.classList.contains('theme-dark') ? 'theme-light' : 'theme-dark';
+      rootBody.classList.remove('theme-dark', 'theme-light');
+      rootBody.classList.add(nextTheme);
+      localStorage.setItem('site-theme', nextTheme);
+      syncThemeToggleLabel();
+    });
+  }
+
 
   const select = (el, all = false) => {
     el = el.trim()
@@ -63,7 +92,7 @@
 
   });
 
- 
+
   new Swiper('.testimonials-slider', {
     speed: 600,
     loop: true,

@@ -6,28 +6,28 @@
       <div class="row align-items-center">
          <div class="col-lg-7" data-aos="fade-up">
             <p class="hero-eyebrow">Let’s build</p>
-            <h1 class="hero-title">Contact</h1>
+            <h1 class="hero-title">{{ ui.nav_contact }}</h1>
             <p class="hero-subtitle">Open for backend engineering, AI integration, and remote product development opportunities.</p>
             <div class="hero-cta">
-               <a class="btn btn-primary hero-button" href="mailto:{{ author_data.email }}">Email</a>
-               <a class="btn btn-outline-light hero-button" href="{{ author_data.telegram }}" target="_blank" rel="noopener">Telegram</a>
-               <a class="btn btn-outline-light hero-button" href="{{ resume_url }}" target="_blank" rel="noopener">Download Resume</a>
+               <a class="btn btn-primary hero-button" href="mailto:{{ author_data.email }}">{{ ui.email_label }}</a>
+               <a class="btn btn-outline-light hero-button" href="{{ author_data.telegram }}" target="_blank" rel="noopener">{{ ui.telegram_label }}</a>
+               <a class="btn btn-outline-light hero-button" href="{{ resume_url }}" target="_blank" rel="noopener">{{ author_data.resume_label }}</a>
             </div>
          </div>
          <div class="col-lg-5 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="150">
             <div class="hero-card">
-               <h3 class="h3 mb-3">Contact details</h3>
+               <h3 class="h3 mb-3">{{ ui.contact_details }}</h3>
                <ul class="list-unstyled contact-list">
                   <li>
-                     <strong>Email</strong>
+                     <strong>{{ ui.email_label }}</strong>
                      <a href="mailto:{{ author_data.email }}">{{ author_data.email }}</a>
                   </li>
                   <li>
-                     <strong>Telegram</strong>
+                     <strong>{{ ui.telegram_label }}</strong>
                      <a href="{{ author_data.telegram }}" target="_blank" rel="noopener">{{ author_data.telegram }}</a>
                   </li>
                   <li>
-                     <strong>GitHub</strong>
+                     <strong>{{ ui.github_label }}</strong>
                      <a href="{{ author_data.github }}" target="_blank" rel="noopener">{{ author_data.github }}</a>
                   </li>
                </ul>
@@ -45,7 +45,7 @@
    <div class="container">
       <div class="row">
          <div class="col-lg-7" data-aos="fade-up">
-            <h2>Send a message</h2>
+            <h2>{{ ui.send_message }}</h2>
             <p class="text-muted">Describe the project, expected timeline, and key goals — I will reply quickly.</p>
             <form action="{% url 'contact' %}" method="post" role="form" class="message-form">
                {% csrf_token %}
@@ -74,7 +74,7 @@
          </div>
          <div class="col-lg-5 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="150">
             <div class="project-card">
-               <h4>Availability</h4>
+               <h4>{{ ui.availability_label }}</h4>
                <p class="text-muted">{{ author_data.availability }}</p>
                <div class="stack-chips">
                   <span>AI Systems</span>

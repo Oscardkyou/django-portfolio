@@ -504,6 +504,72 @@ body.theme-dark {
   padding-top: 90px;
 }
 
+body.theme-light {
+  font-family: 'Montserrat Alternates', sans-serif;
+  background: #ffffff;
+  color: #0d1e2d;
+  padding-top: 90px;
+}
+
+body.theme-light .nav-blur {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(13, 30, 45, 0.08);
+}
+
+body.theme-light .navbar .nav-link,
+body.theme-light .navbar-brand {
+  color: #0d1e2d;
+}
+
+body.theme-light .hero-title,
+body.theme-light .project-card h4,
+body.theme-light .project-card h3,
+body.theme-light .metric-card h4,
+body.theme-light .skill-card h5,
+body.theme-light .hero-card h3 {
+  color: #0d1e2d;
+}
+
+body.theme-light .hero-card,
+body.theme-light .project-card,
+body.theme-light .skill-card,
+body.theme-light .metric-card,
+body.theme-light .contact-card,
+body.theme-light .about-card {
+  background: #ffffff;
+  border: 1px solid rgba(13, 30, 45, 0.08);
+  box-shadow: 0 20px 40px rgba(13, 30, 45, 0.06);
+}
+
+body.theme-light .hero-subtitle,
+body.theme-light .text-muted,
+body.theme-light .contact-note,
+body.theme-light .skill-card ul li {
+  color: #5a6877 !important;
+}
+
+body.theme-light .tech-icons span,
+body.theme-light .stack-chips span,
+body.theme-light .lang-link.active {
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+  color: #1d4ed8;
+}
+
+body.theme-light .architecture-diagram pre {
+  background: #f5f7fb;
+  color: #0d1e2d;
+}
+
+body.theme-light .project-card-footer a,
+body.theme-light .project-links a,
+body.theme-light .link-light,
+body.theme-light .contact-list a,
+body.theme-light a {
+  color: #1d4ed8;
+}
+
 body.theme-dark a {
   color: #9dd7ff;
 }
@@ -530,6 +596,40 @@ body.theme-dark a:hover {
 
 .nav-cta {
   margin-left: 1.5rem;
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid var(--card-border);
+}
+
+.lang-link {
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.lang-link.active {
+  background: var(--accent-soft);
+  color: #ffffff;
+}
+
+.theme-toggle {
+  min-width: 92px;
 }
 
 .section {

@@ -5,12 +5,12 @@ from django.contrib import messages
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 
-from .data import AUTHOR, BLOG_POSTS, CASE_STUDIES, GITHUB_STATS, PERFORMANCE, PROJECTS, RESUME_URL, SKILLS
+from .data import AUTHOR, BLOG_POSTS, CASE_STUDIES, GITHUB_STATS, PERFORMANCE, PROJECTS, RESUME_URL, SKILLS, UI_TEXT
 from .models import Message
 from .services import AskAIService, PredictService
 
 
-SUPPORTED_LANGUAGES = ("en", "kz")
+SUPPORTED_LANGUAGES = ("en", "ru")
 
 
 def _get_language(request: HttpRequest) -> str:
@@ -40,6 +40,7 @@ def _build_shared_context(request: HttpRequest) -> Dict[str, Any]:
         "lang": lang,
         "supported_languages": SUPPORTED_LANGUAGES,
         "resume_url": RESUME_URL,
+        "ui": _localized_copy(UI_TEXT, lang),
     }
 
 

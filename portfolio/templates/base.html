@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ lang|default:'en' }}">
    <head>
       <meta charset="utf-8">
       <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -31,26 +31,33 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                <ul class="navbar-nav ms-auto">
                   <li class="nav-item">
-                     <a class="nav-link" href="{% url 'index' %}">Home</a>
+                     <a class="nav-link" href="{% url 'index' %}?lang={{ lang }}">{{ ui.nav_home }}</a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="{% url 'about' %}">About</a>
+                     <a class="nav-link" href="{% url 'about' %}?lang={{ lang }}">{{ ui.nav_about }}</a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="{% url 'projects' %}">Projects</a>
+                     <a class="nav-link" href="{% url 'projects' %}?lang={{ lang }}">{{ ui.nav_projects }}</a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="{% url 'case_studies' %}">Case Studies</a>
+                     <a class="nav-link" href="{% url 'case_studies' %}?lang={{ lang }}">{{ ui.nav_case_studies }}</a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="{% url 'skills' %}">Skills</a>
+                     <a class="nav-link" href="{% url 'skills' %}?lang={{ lang }}">{{ ui.nav_skills }}</a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                     <a class="nav-link" href="{% url 'contact' %}?lang={{ lang }}">{{ ui.nav_contact }}</a>
                   </li>
                </ul>
                <div class="nav-cta">
-                  <a class="btn btn-outline-light" href="{{ resume_url|default:'/static/assets/dauren-askarov-resume.pdf' }}" target="_blank" rel="noopener">Download Resume</a>
+                  <div class="nav-controls">
+                     <div class="lang-switch" aria-label="Language switcher">
+                        <a class="lang-link{% if lang == 'en' %} active{% endif %}" href="{{ request.path }}?lang=en">EN</a>
+                        <a class="lang-link{% if lang == 'ru' %} active{% endif %}" href="{{ request.path }}?lang=ru">RU</a>
+                     </div>
+                     <button type="button" class="btn btn-outline-light theme-toggle" id="theme-toggle" data-light-label="{{ ui.theme_light }}" data-dark-label="{{ ui.theme_dark }}">{{ ui.theme_dark }}</button>
+                     <a class="btn btn-outline-light" href="{{ resume_url|default:'/static/assets/dauren-askarov-resume.pdf' }}" target="_blank" rel="noopener">{% if author_data %}{{ author_data.resume_label|default:'Download Resume' }}{% else %}Download Resume{% endif %}</a>
+                  </div>
                </div>
             </div>
          </div>

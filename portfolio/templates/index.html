@@ -18,9 +18,9 @@
                <span><i class='bx bx-brain'></i>AI</span>
             </div>
             <div class="hero-cta">
-               <a class="btn btn-primary hero-button" href="{% url 'projects' %}">Projects</a>
-               <a class="btn btn-outline-light hero-button" href="{% url 'contact' %}">Contact</a>
-               <a class="btn btn-outline-light hero-button" href="{{ resume_url }}" target="_blank" rel="noopener">Download Resume</a>
+               <a class="btn btn-primary hero-button" href="{% url 'projects' %}?lang={{ lang }}">{{ ui.hero_projects }}</a>
+               <a class="btn btn-outline-light hero-button" href="{% url 'contact' %}?lang={{ lang }}">{{ ui.hero_contact }}</a>
+               <a class="btn btn-outline-light hero-button" href="{{ resume_url }}" target="_blank" rel="noopener">{{ author_data.resume_label }}</a>
             </div>
             <div class="stack-chips mt-4">
                {% for point in author_data.proof_points %}
@@ -30,7 +30,7 @@
          </div>
          <div class="col-lg-5 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="150">
             <div class="hero-card">
-               <h3 class="h3 mb-3">Featured Project</h3>
+               <h3 class="h3 mb-3">{{ ui.featured_project }}</h3>
                {% if featured_project %}
                <p class="mb-2 fw-semibold">{{ featured_project.title }}</p>
                <p class="mb-3 text-muted">{{ featured_project.summary }}</p>
@@ -45,7 +45,7 @@
                   {% endfor %}
                </ul>
                <div class="hero-card-footer">
-                  <a class="link-light fw-semibold" href="{% url 'work_detail' featured_project.slug %}">See full case study</a>
+                  <a class="link-light fw-semibold" href="{% url 'work_detail' featured_project.slug %}?lang={{ lang }}">{{ ui.see_full_case }}</a>
                </div>
                {% else %}
                <p class="mb-0">Featured projects will appear here once added.</p>
@@ -60,10 +60,10 @@
    <div class="container">
       <div class="section-header">
          <div>
-            <h2>Projects</h2>
+            <h2>{{ ui.projects_heading }}</h2>
             <p>Engineering case highlights with clear scope, architecture, and measurable outcomes.</p>
          </div>
-         <a class="btn btn-outline-light" href="{% url 'projects' %}">All Projects</a>
+         <a class="btn btn-outline-light" href="{% url 'projects' %}?lang={{ lang }}">{{ ui.projects_heading }}</a>
       </div>
       <div class="row g-4">
          {% for project in projects %}
@@ -74,8 +74,8 @@
                   <p class="text-muted">{{ project.summary }}</p>
                </div>
                <div class="project-card-body">
-                  <p><strong>Task:</strong> {{ project.problem }}</p>
-                  <p><strong>What I did:</strong> {{ project.role }}</p>
+                  <p><strong>{{ ui.task_label }}:</strong> {{ project.problem }}</p>
+                  <p><strong>{{ ui.contribution_label }}:</strong> {{ project.role }}</p>
                   <p>{{ project.description }}</p>
                   <ul class="list-unstyled mb-3">
                      {% for result in project.results|slice:":2" %}
@@ -88,7 +88,7 @@
                      {% endfor %}
                   </div>
                   <div class="architecture-diagram">
-                     <h6>Architecture</h6>
+                     <h6>{{ ui.architecture_label }}</h6>
                      <pre>
 {% for layer in project.architecture %}{{ layer }}
 {% if not forloop.last %}↓
@@ -97,7 +97,7 @@
                </div>
                <div class="project-card-footer">
                   <a href="{{ project.github_url }}" target="_blank" rel="noopener">GitHub</a>
-                  <a href="{% url 'case_studies' %}" class="ms-3">Case Studies</a>
+                  <a href="{% url 'case_studies' %}?lang={{ lang }}" class="ms-3">{{ ui.nav_case_studies }}</a>
                </div>
             </div>
          </div>
@@ -110,10 +110,10 @@
    <div class="container">
       <div class="section-header">
          <div>
-            <h2>Skills</h2>
+            <h2>{{ ui.skills_heading }}</h2>
             <p>Structured skill blocks covering backend, data, cloud, AI, DevOps, and testing.</p>
          </div>
-         <a class="btn btn-outline-light" href="{% url 'skills' %}">View Skills</a>
+         <a class="btn btn-outline-light" href="{% url 'skills' %}?lang={{ lang }}">{{ ui.skills_heading }}</a>
       </div>
       <div class="row g-4">
          {% for group, items in skill_groups.items %}
@@ -136,7 +136,7 @@
    <div class="container">
       <div class="section-header">
          <div>
-            <h2>Performance</h2>
+            <h2>{{ ui.performance_heading }}</h2>
             <p>Proof of system reliability and optimization.</p>
          </div>
       </div>
@@ -157,7 +157,7 @@
    <div class="container">
       <div class="section-header">
          <div>
-            <h2>Backend Portfolio Highlights</h2>
+            <h2>{{ ui.backend_highlights }}</h2>
             <p>{{ author_data.availability }}</p>
          </div>
       </div>
