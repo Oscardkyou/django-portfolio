@@ -3,6 +3,8 @@ from django.db import models
 class Skill(models.Model):
     name = models.CharField(max_length=30)
     level = models.CharField(max_length=3)
+    category = models.CharField(max_length=50, default='Backend')
+    icon = models.CharField(max_length=50, blank=True)
 
     class Meta:
         ordering = ['id']
@@ -29,15 +31,46 @@ class Work(models.Model):
     title = models.CharField(max_length=150)
     slug = models.SlugField(max_length=150, unique=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='works')
-    image = models.ImageField(upload_to='works')
+    image = models.ImageField(upload_to='works', blank=True)
+    summary = models.CharField(max_length=220, blank=True)
     description = models.TextField()
     stack = models.TextField()
-    link = models.URLField(max_length=200)
+    features = models.TextField(blank=True)
+    architecture = models.TextField(blank=True)
+    results = models.TextField(blank=True)
+    link = models.URLField(max_length=200, blank=True)
+    github_url = models.URLField(max_length=200, blank=True)
+    is_featured = models.BooleanField(default=True)
+    display_order = models.PositiveIntegerField(default=0)
 
     class Meta:
-        ordering = ['-id']
+        ordering = ['display_order', '-id']
         verbose_name = 'Работа'
         verbose_name_plural = 'Работы'
+
+    def __str__(self):
+        return self.title
+
+
+class CaseStudy(models.Model):
+    title = models.CharField(max_length=150)
+    slug = models.SlugField(max_length=150, unique=True)
+    project = models.ForeignKey(Work, on_delete=models.SET_NULL, null=True, blank=True, related_name='case_studies')
+    problem = models.TextField()
+    solution = models.TextField()
+    stack = models.TextField()
+    metrics = models.TextField(blank=True)
+    architecture = models.TextField(blank=True)
+    github_link = models.URLField(max_length=200, blank=True)
+    demo_link = models.URLField(max_length=200, blank=True)
+    featured = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-featured', '-updated_at']
+        verbose_name = 'Case study'
+        verbose_name_plural = 'Case studies'
 
     def __str__(self):
         return self.title
@@ -71,11 +104,17 @@ class Item(models.Model):
 
 
 class Author(models.Model):
-    name = models.CharField(max_length=15)
-    lastname = models.CharField(max_length=15)
+    name = models.CharField(max_length=50)
+    lastname = models.CharField(max_length=50)
+    title = models.CharField(max_length=120, blank=True)
+    location = models.CharField(max_length=120, blank=True)
+    email = models.EmailField(blank=True)
+    telegram = models.URLField(blank=True)
+    github = models.URLField(blank=True)
     about = models.TextField()
     skills = models.ManyToManyField(Skill, related_name='author')
-    image = models.ImageField(upload_to='author')
+    image = models.ImageField(upload_to='author', blank=True)
+    focus_areas = models.TextField(blank=True)
 
     class Meta:
         ordering = ['-id']

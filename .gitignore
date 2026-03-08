@@ -1,26 +1,65 @@
-# Byte-compiled / optimized / DLL files
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyo
+*.pyd
 
-# Исключить файлы миграций Django
-**/migrations/
-
-# Исключить файлы сборки
-node_modules/
-*.env
-
-# Игнорировать файлы настроек Django, если они не содержат конфиденциальных данных
-#myproject/myapp/settings.py
-
-# Ваши собственные временные или локальные файлы
-*.swp
-.DS_Store
-
-# Виртуальное окружение
+# Virtual environments
+.venv/
 venv/
 env/
 virtualenv/
 
-# База данных
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Django / local data
 db.sqlite3
+*.sqlite3
+*.sqlite3-journal
+media/
+staticfiles/
+
+# Logs and reports
+*.log
+coverage/
+.coverage
+htmlcov/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# IDE / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Node
+node_modules/
+
+# Temporary / cache
+.cache/
+tmp/
+temp/
+*.tmp
+
+# Secrets / credentials
+secrets/
+*.pem
+*.key
+*.crt
+
+# ML / experiment artifacts
+mlruns/
+artifacts/
+models/
+checkpoints/
+wandb/
+
+# Static build leftovers
+collectstatic/
