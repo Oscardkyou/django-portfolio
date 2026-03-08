@@ -1,42 +1,54 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
    <head>
       <meta charset="utf-8">
       <meta content="width=device-width, initial-scale=1.0" name="viewport">
-      <title>Портфолио разработчика - {% block title %}{% endblock %}</title>
-      <meta content="Портфолио backend-разработчика: проекты, услуги и контакты для сотрудничества." name="description">
-      <meta content="backend, Go, Python, Django, API, разработка, портфолио" name="keywords">
+      <title>Dauren Askarov | {% block title %}{% endblock %}</title>
+      <meta name="description" content="Python Backend Engineer Portfolio. AI systems, FastAPI, Django, RAG pipelines, scalable APIs.">
+      <meta name="keywords" content="Python, Backend, FastAPI, Django, RAG, AI Systems, APIs, Portfolio">
+      <meta property="og:title" content="Dauren Askarov | Python Backend Engineer">
+      <meta property="og:description" content="AI systems, FastAPI, Django, RAG pipelines, scalable APIs.">
+      <meta property="og:type" content="website">
       <link rel="shortcut icon" href="{% static 'icons8-favicon-96.ico' %}">
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
       <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
       <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
       <link href="{% static 'assets/css/swiper-bundle.min.css' %}" rel="stylesheet">
       <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
    </head>
-   <body>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-         <div class="container-fluid">
-            <a class="navbar-brand ms-5" href="{% url 'index' %}">
-               <h3>Портфолио</h3>
+   <body class="theme-dark">
+      <nav class="navbar navbar-expand-lg navbar-dark fixed-top nav-blur">
+         <div class="container">
+            <a class="navbar-brand" href="{% url 'index' %}">
+               <span class="brand-dot">●</span> Dauren Askarov
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-               <ul class="navbar-nav ms-auto me-5">
+               <ul class="navbar-nav ms-auto">
                   <li class="nav-item">
-                     <a class="nav-link" href="{% url 'index' %}">Главная</a>
+                     <a class="nav-link" href="{% url 'index' %}">Home</a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="{% url 'about' %}">Обо мне</a>
+                     <a class="nav-link" href="{% url 'about' %}">About</a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="{% url 'contact' %}">Контакты</a>
+                     <a class="nav-link" href="{% url 'projects' %}">Projects</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'skills' %}">Skills</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'contact' %}">Contact</a>
                   </li>
                </ul>
+               <div class="nav-cta">
+                  <a class="btn btn-outline-light" href="/static/assets/dauren-askarov-resume.pdf" target="_blank" rel="noopener">Download Resume</a>
+               </div>
             </div>
          </div>
       </nav>
@@ -58,15 +70,15 @@
       </main>
       <footer class="footer" role="contentinfo">
          <div class="container">
-            <div class="row">
+            <div class="row align-items-center">
                <div class="col-sm-6">
-                  <p class="mb-1">&copy; {% now "Y" %} Askarov Dauren</p>
+                  <p class="mb-1">&copy; {% now "Y" %} Dauren Askarov · Python Backend / AI Engineer</p>
                </div>
                <div class="col-sm-6 social text-md-end">
-                  <a href="#" aria-label="Telegram"><span class="bx bxl-telegram"></span></a>
-                  <a href="#" aria-label="GitHub"><span class="bx bxl-github"></span></a>
-                  <a href="#" aria-label="Stack Overflow"><span class="bx bxl-stack-overflow"></span></a>
-                  <a href="#" aria-label="LinkedIn"><span class="bx bxl-linkedin"></span></a>
+                  <a href="https://t.me/DK_Oscar" aria-label="Telegram" target="_blank" rel="noopener"><span class="bx bxl-telegram"></span></a>
+                  <a href="https://github.com/Oscardkyou" aria-label="GitHub" target="_blank" rel="noopener"><span class="bx bxl-github"></span></a>
+                  <a href="mailto:dauren2050@yandex.ru" aria-label="Email"><span class="bx bx-envelope"></span></a>
+                  <a href="{% url 'contact' %}" aria-label="Contact"><span class="bx bx-message-square-detail"></span></a>
                </div>
             </div>
          </div>

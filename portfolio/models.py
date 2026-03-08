@@ -36,8 +36,10 @@ class Work(models.Model):
     description = models.TextField()
     stack = models.TextField()
     features = models.TextField(blank=True)
+    architecture = models.TextField(blank=True)
     results = models.TextField(blank=True)
     link = models.URLField(max_length=200, blank=True)
+    github_url = models.URLField(max_length=200, blank=True)
     is_featured = models.BooleanField(default=True)
     display_order = models.PositiveIntegerField(default=0)
 
@@ -45,6 +47,30 @@ class Work(models.Model):
         ordering = ['display_order', '-id']
         verbose_name = 'Работа'
         verbose_name_plural = 'Работы'
+
+    def __str__(self):
+        return self.title
+
+
+class CaseStudy(models.Model):
+    title = models.CharField(max_length=150)
+    slug = models.SlugField(max_length=150, unique=True)
+    project = models.ForeignKey(Work, on_delete=models.SET_NULL, null=True, blank=True, related_name='case_studies')
+    problem = models.TextField()
+    solution = models.TextField()
+    stack = models.TextField()
+    metrics = models.TextField(blank=True)
+    architecture = models.TextField(blank=True)
+    github_link = models.URLField(max_length=200, blank=True)
+    demo_link = models.URLField(max_length=200, blank=True)
+    featured = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-featured', '-updated_at']
+        verbose_name = 'Case study'
+        verbose_name_plural = 'Case studies'
 
     def __str__(self):
         return self.title

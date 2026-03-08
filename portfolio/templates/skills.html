@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Skills{% endblock %}
+{% block content %}
+<section class="section hero-section">
+   <div class="container">
+      <div class="row align-items-center">
+         <div class="col-lg-7" data-aos="fade-up">
+            <p class="hero-eyebrow">Skill map</p>
+            <h1 class="hero-title">Skills</h1>
+            <p class="hero-subtitle">Recruiter-friendly overview of backend, AI, database, and cloud capabilities.</p>
+            <div class="hero-cta">
+               <a class="btn btn-primary hero-button" href="{% url 'projects' %}">View Projects</a>
+               <a class="btn btn-outline-light hero-button" href="{{ resume_url }}" target="_blank" rel="noopener">Download Resume</a>
+            </div>
+         </div>
+         <div class="col-lg-5 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="150">
+            <div class="hero-card">
+               <h3 class="h3 mb-3">Tech focus</h3>
+               <p class="mb-0">Async backend, AI pipelines, system reliability, and cloud-native delivery.</p>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+<section class="section">
+   <div class="container">
+      <div class="row g-4">
+         {% for group, items in skill_groups.items %}
+         <div class="col-md-6 col-lg-3">
+            <div class="skill-card">
+               <h5>{{ group }}</h5>
+               <ul class="list-unstyled mb-0">
+                  {% for item in items %}
+                  <li><i class='{{ item.icon }}'></i> {{ item.name }}</li>
+                  {% endfor %}
+               </ul>
+            </div>
+         </div>
+         {% endfor %}
+      </div>
+   </div>
+</section>
+
+<section class="section pb-5">
+   <div class="container">
+      <div class="section-header">
+         <div>
+            <h2>Tech stack icons</h2>
+            <p>Quick scan of primary technologies.</p>
+         </div>
+      </div>
+      <div class="tech-icons">
+         <span><i class='bx bxl-python'></i>Python</span>
+         <span><i class='bx bx-code-alt'></i>FastAPI</span>
+         <span><i class='bx bxl-docker'></i>Docker</span>
+         <span><i class='bx bxl-aws'></i>AWS</span>
+         <span><i class='bx bxs-bolt'></i>Redis</span>
+         <span><i class='bx bxs-data'></i>PostgreSQL</span>
+      </div>
+   </div>
+</section>
+{% endblock %}

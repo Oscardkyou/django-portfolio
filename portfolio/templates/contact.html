@@ -1,62 +1,92 @@
 {% extends 'base.html' %}
-{% block title %}Контакты{% endblock %}
+{% block title %}Contact{% endblock %}
 {% block content %}
-<section class="section pb-5">
+<section class="section hero-section">
    <div class="container">
-      <div class="row mb-5 align-items-end">
-         <div class="col-md-6" data-aos="fade-up">
-            <h2>Сообщение</h2>
-            <p class="mb-0">Есть вопросы по проекту, нужна консультация? Напишите мне, я отвечаю на все сообщения.</p>
+      <div class="row align-items-center">
+         <div class="col-lg-7" data-aos="fade-up">
+            <p class="hero-eyebrow">Let’s build</p>
+            <h1 class="hero-title">Contact</h1>
+            <p class="hero-subtitle">Open for AI integrations, backend architecture, and fast delivery projects.</p>
+            <div class="hero-cta">
+               <a class="btn btn-primary hero-button" href="mailto:{{ author_data.email }}">Email</a>
+               <a class="btn btn-outline-light hero-button" href="{{ resume_url }}" target="_blank" rel="noopener">Download Resume</a>
+            </div>
+         </div>
+         <div class="col-lg-5 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="150">
+            <div class="hero-card">
+               <h3 class="h3 mb-3">Contact details</h3>
+               <ul class="list-unstyled contact-list">
+                  <li>
+                     <strong>Email</strong>
+                     <a href="mailto:{{ author_data.email }}">{{ author_data.email }}</a>
+                  </li>
+                  <li>
+                     <strong>Telegram</strong>
+                     <a href="{{ author_data.telegram }}" target="_blank" rel="noopener">{{ author_data.telegram }}</a>
+                  </li>
+                  <li>
+                     <strong>GitHub</strong>
+                     <a href="{{ author_data.github }}" target="_blank" rel="noopener">{{ author_data.github }}</a>
+                  </li>
+               </ul>
+               <div class="contact-note">
+                  <p class="mb-1">Response within 24 hours.</p>
+                  <p class="mb-0">Almaty, Kazakhstan · Remote friendly</p>
+               </div>
+            </div>
          </div>
       </div>
+   </div>
+</section>
+
+<section class="section pb-5">
+   <div class="container">
       <div class="row">
-         <div class="col-md-6 mb-5 mb-md-0" data-aos="fade-up">
+         <div class="col-lg-7" data-aos="fade-up">
+            <h2>Send a message</h2>
+            <p class="text-muted">Describe the project, expected timeline, and key goals — I will reply quickly.</p>
             <form action="{% url 'contact' %}" method="post" role="form" class="message-form">
                {% csrf_token %}
                <div class="row gy-3">
                   <div class="col-md-6 form-group">
-                     <label for="name">Имя</label>
+                     <label for="name">Name</label>
                      <input type="text" name="name" class="form-control" id="name" required>
                   </div>
                   <div class="col-md-6 form-group">
-                     <label for="name">Email</label>
+                     <label for="email">Email</label>
                      <input type="email" class="form-control" name="email" id="email" required>
                   </div>
                   <div class="col-md-12 form-group">
-                     <label for="name">Тема</label>
+                     <label for="subject">Subject</label>
                      <input type="text" class="form-control" name="subject" id="subject" required>
                   </div>
                   <div class="col-md-12 form-group">
-                     <label for="name">Текст сообщения</label>
-                     <textarea class="form-control" name="message" cols="30" rows="10" required></textarea>
+                     <label for="message">Message</label>
+                     <textarea class="form-control" name="message" id="message" cols="30" rows="6" required></textarea>
                   </div>
                   <div class="col-md-6 mt-0 form-group">
-                     <input type="submit" class="readmore d-block w-100" value="Отправить">
+                     <input type="submit" class="btn btn-primary d-block w-100" value="Send message">
                   </div>
                </div>
             </form>
          </div>
-         <div class="col-md-4 ml-auto order-2" data-aos="fade-up">
-            <div class="contact-card">
-               <h3 class="h3 mb-3">Контакты</h3>
-               <ul class="list-unstyled contact-list">
-                  <li>
-                     <strong>Адрес</strong>
-                     <span>г. Алматы, ул. Коргалжин 4</span>
-                  </li>
-                  <li>
-                     <strong>Телефон</strong>
-                     <a href="tel:+77013025129">+7 701 302 5129</a>
-                  </li>
-                  <li>
-                     <strong>Email</strong>
-                     <a href="mailto:a-dauren@bk.ru">a-dauren@bk.ru</a>
-                  </li>
-               </ul>
-               <div class="contact-note">
-                  <p class="mb-1">Отвечаю в течение 24 часов.</p>
-                  <p class="mb-0">Можно писать в Telegram или LinkedIn.</p>
+         <div class="col-lg-5 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="150">
+            <div class="project-card">
+               <h4>Availability</h4>
+               <p class="text-muted">Available for new backend / AI projects in Q2.</p>
+               <div class="stack-chips">
+                  <span>AI Systems</span>
+                  <span>RAG Pipelines</span>
+                  <span>Async APIs</span>
+                  <span>Observability</span>
                </div>
+            </div>
+            <div class="project-card">
+               <h4>API demo</h4>
+               <p class="text-muted">Showcase JSON endpoints.</p>
+               <a class="link-light" href="{% url 'api_projects' %}">/api/projects</a><br>
+               <a class="link-light" href="{% url 'api_skills' %}">/api/skills</a>
             </div>
          </div>
       </div>
