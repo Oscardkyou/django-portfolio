@@ -1,13 +1,15 @@
+import json
 from copy import deepcopy
 from typing import Any, Dict, List, Optional, Tuple
 
 from django.contrib import messages
+from django.views.decorators.http import require_GET, require_POST
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 
 from .data import AUTHOR, BLOG_POSTS, CASE_STUDIES, GITHUB_STATS, PERFORMANCE, PROJECTS, RESUME_URL, SKILLS, UI_TEXT
 from .models import Message
-from .services import AskAIService, PredictService
+from .services import AskAIService, ExperimentService, PredictService
 
 
 SUPPORTED_LANGUAGES = ("en", "ru")
@@ -227,9 +229,31 @@ def api_case_studies(request: HttpRequest) -> JsonResponse:
     return JsonResponse({"lang": lang, "case_studies": _localized_copy(_get_case_studies(), lang)})
 
 
-def api_ask_ai(request: HttpRequest) -> JsonResponse:
-    return JsonResponse(AskAIService.get_status_payload(), status=501)
+@require_POST
+def api_ai_chat(request: HttpRequest) -> JsonResponse:
+    payload = json.loads(request.body or "{}") if request.body else {}
+    message = str(payload.get("message", "")).strip()
+    if not message:
+        return JsonResponse({"detail": "Field 'message' is required."}, status=400)
+    return JsonResponse(AskAIService.build_answer(message))
 
 
-def api_predict(request: HttpRequest) -> JsonResponse:
-    return JsonResponse(PredictService.get_status_payload(), status=501)
+@require_GET
+def api_ai_experiments(request: HttpRequest) -> JsonResponse:
+    return JsonResponse(ExperimentService.list_experiments())
+
+
+@require_POST
+def api_ai_predict(request: HttpRequest) -> JsonResponse:
+    payload = json.loads(request.body or "{}") if request.body else {}
+    try:
+        team_size = int(payload.get("team_size", 0))
+        duration_months = int(payload.get("duration_months", 0))
+        ai_features = bool(payload.get("ai_features", False))
+    except (TypeError, ValueError):
+        return JsonResponse({"detail": "Invalid payload. Expected team_size, duration_months, ai_features."}, status=400)
+
+    if team_size <= 0 or duration_months <= 0:
+        return JsonResponse({"detail": "team_size and duration_months must be positive."}, status=400)
+
+    return JsonResponse(PredictService.predict_complexity(team_size, duration_months, ai_features))

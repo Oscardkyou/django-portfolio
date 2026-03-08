@@ -157,30 +157,30 @@
    <div class="container">
       <div class="section-header">
          <div>
-            <h2>{{ ui.backend_highlights }}</h2>
-            <p>{{ author_data.availability }}</p>
+            <h2>AI Demo</h2>
+            <p>Three backend-facing demo endpoints that showcase LLM-style chat, ML experiment tracking, and prediction workflows.</p>
          </div>
       </div>
       <div class="row g-4">
          <div class="col-md-6 col-lg-4">
             <div class="project-card">
-               <h5>Backend-First Portfolio</h5>
-               <p class="text-muted">Public content is exposed via JSON endpoints, reflecting a backend-first implementation approach.</p>
-               <a href="{% url 'api_projects' %}" class="link-light">/api/projects</a>
+               <h5>AI Chat</h5>
+               <p class="text-muted">Ask about my projects, skills, and engineering experience through a demo assistant endpoint.</p>
+               <a href="{% url 'api_ai_chat' %}" class="link-light">POST /api/ai/chat</a>
             </div>
          </div>
          <div class="col-md-6 col-lg-4">
             <div class="project-card">
-               <h5>Planned AI Extension</h5>
-               <p class="text-muted">Architecture-ready endpoint reserved for AI assistant integration in future iterations.</p>
-               <a href="{% url 'api_ask_ai' %}" class="link-light">/api/ask-ai</a>
+               <h5>ML Experiments</h5>
+               <p class="text-muted">Demo experiment registry with model names, accuracy, version, and stage metadata.</p>
+               <a href="{% url 'api_ai_experiments' %}" class="link-light">GET /api/ai/experiments</a>
             </div>
          </div>
          <div class="col-md-6 col-lg-4">
             <div class="project-card">
-               <h5>Planned ML Demo</h5>
-               <p class="text-muted">Reserved endpoint for future predictive demo workflows and model-serving examples.</p>
-               <a href="{% url 'api_predict' %}" class="link-light">/api/predict</a>
+               <h5>Prediction Demo</h5>
+               <p class="text-muted">Rule-based ML-style endpoint that estimates project complexity from delivery inputs.</p>
+               <a href="{% url 'api_ai_predict' %}" class="link-light">POST /api/ai/predict</a>
             </div>
          </div>
       </div>

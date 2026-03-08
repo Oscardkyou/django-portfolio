@@ -2,9 +2,10 @@ from django.urls import path
 
 from .views import (
     about,
-    api_ask_ai,
+    api_ai_chat,
+    api_ai_experiments,
+    api_ai_predict,
     api_case_studies,
-    api_predict,
     api_projects,
     api_skills,
     case_studies,
@@ -26,6 +27,7 @@ urlpatterns = [
     path('api/projects/', api_projects, name='api_projects'),
     path('api/skills/', api_skills, name='api_skills'),
     path('api/case-studies/', api_case_studies, name='api_case_studies'),
-    path('api/ask-ai/', api_ask_ai, name='api_ask_ai'),
-    path('api/predict/', api_predict, name='api_predict'),
+    path('api/ai/chat/', api_ai_chat, name='api_ai_chat'),
+    path('api/ai/experiments/', api_ai_experiments, name='api_ai_experiments'),
+    path('api/ai/predict/', api_ai_predict, name='api_ai_predict'),
 ]
