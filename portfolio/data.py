@@ -22,7 +22,7 @@ AUTHOR = {
         "en": "Python, FastAPI, Django, Docker, AWS, RAG, and async backend systems.",
         "ru": "Python, FastAPI, Django, Docker, AWS, RAG и асинхронные backend-системы.",
     },
-    "email": "dauren2050@yandex.ru",
+    "email": "daurendevdk@gmail.com",
     "telegram": "https://t.me/DK_Oscar",
     "github": "https://github.com/Oscardkyou",
     "linkedin": "",
