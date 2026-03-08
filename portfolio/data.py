@@ -1,34 +1,49 @@
 AUTHOR = {
-    "full_name": "Dauren Askarov",
-    "name": "Dauren",
-    "lastname": "Askarov",
-    "title": "Python Backend Engineer | AI Integration",
-    "location": "Almaty, Kazakhstan",
-    "bio": (
-        "Python backend engineer focused on AI integration, scalable APIs, and "
-        "production-grade systems for data-intensive products."
-    ),
-    "hero_summary": (
-        "I build backend systems for AI products, real-time platforms, and "
-        "high-load APIs with a focus on reliability, performance, and clean architecture."
-    ),
-    "hero_strengths": (
-        "Strong in Python, FastAPI, Django, Docker, AWS, RAG pipelines, async backend, "
-        "and production AI integration."
-    ),
+    "full_name": {"en": "Dauren Askarov", "kz": "Дәурен Асқаров"},
+    "name": {"en": "Dauren", "kz": "Дәурен"},
+    "lastname": {"en": "Askarov", "kz": "Асқаров"},
+    "title": {"en": "Python Backend Engineer | AI Integration", "kz": "Python Backend Engineer | AI Integration"},
+    "location": {"en": "Almaty, Kazakhstan", "kz": "Алматы, Қазақстан"},
+    "bio": {
+        "en": (
+            "Python backend engineer focused on AI integration, scalable APIs, and "
+            "production-grade systems for data-intensive products."
+        ),
+        "kz": (
+            "AI интеграция, масштабталатын API және production деңгейіндегі жүйелерге "
+            "бағытталған Python backend инженері."
+        ),
+    },
+    "hero_summary": {
+        "en": "I build scalable APIs, AI-enabled backend systems, and real-time platforms.",
+        "kz": "Мен масштабталатын API, AI қосылған backend жүйелерін және real-time платформаларды жасаймын.",
+    },
+    "hero_strengths": {
+        "en": "Python, FastAPI, Django, Docker, AWS, RAG, and async backend systems.",
+        "kz": "Python, FastAPI, Django, Docker, AWS, RAG және async backend жүйелері.",
+    },
     "email": "dauren2050@yandex.ru",
     "telegram": "https://t.me/DK_Oscar",
     "github": "https://github.com/Oscardkyou",
     "linkedin": "",
-    "availability": "Available for remote backend and AI engineering opportunities.",
-    "resume_label": "Download Resume",
-    "cta_primary": "View Projects",
-    "cta_secondary": "Contact",
+    "availability": {
+        "en": "Available for remote backend and AI engineering opportunities.",
+        "kz": "Қашықтан backend және AI engineering мүмкіндіктеріне ашықпын.",
+    },
+    "resume_label": {"en": "Download Resume", "kz": "Резюмені жүктеу"},
+    "cta_primary": {"en": "View Projects", "kz": "Жобаларды көру"},
+    "cta_secondary": {"en": "Contact", "kz": "Байланыс"},
     "focus_areas": [
-        "Backend architecture for AI products",
-        "RAG pipelines and LLM integration",
-        "High-performance API development",
-        "Cloud-native delivery and observability",
+        {"en": "Backend architecture for AI products", "kz": "AI өнімдеріне арналған backend архитектура"},
+        {"en": "RAG pipelines and LLM integration", "kz": "RAG pipeline және LLM интеграциясы"},
+        {"en": "High-performance API development", "kz": "Жоғары өнімді API әзірлеу"},
+        {"en": "Cloud-native delivery and observability", "kz": "Cloud-native жеткізу және observability"},
+    ],
+    "proof_points": [
+        {"en": "3 backend / AI case studies", "kz": "3 backend / AI case study"},
+        {"en": "API-ready portfolio", "kz": "API-ready портфолио"},
+        {"en": "Remote-friendly collaboration", "kz": "Қашықтан жұмысқа ыңғайлы"},
+        {"en": "FastAPI, Django, Docker, AWS", "kz": "FastAPI, Django, Docker, AWS"},
     ],
 }
 

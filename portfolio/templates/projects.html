@@ -40,7 +40,7 @@
                      <h3>{{ project.title }}</h3>
                      <p class="text-muted">{{ project.summary }}</p>
                      <p><strong>Task:</strong> {{ project.problem }}</p>
-                     <p><strong>What I did:</strong> {{ project.role }}</p>
+                     <p><strong>My contribution:</strong> {{ project.role }}</p>
                      <p>{{ project.description }}</p>
                      <div class="stack-chips">
                         {% for item in project.stack %}
@@ -107,16 +107,24 @@
    <div class="container">
       <div class="section-header">
          <div>
-            <h2>GitHub Activity</h2>
-            <p>Current contribution trends.</p>
+            <h2>More engineering proof</h2>
+            <p>See detailed problem/solution/architecture breakdowns and public JSON endpoints.</p>
          </div>
       </div>
       <div class="row g-4">
-         <div class="col-lg-5">
-            <img src="{{ github_stats.stats }}" alt="GitHub stats" class="img-fluid github-image">
+         <div class="col-md-6">
+            <div class="project-card">
+               <h4>Case Studies</h4>
+               <p class="text-muted">Deeper breakdowns of architecture, solution design, and measurable outcomes.</p>
+               <a class="link-light" href="{% url 'case_studies' %}">Open /case-studies/</a>
+            </div>
          </div>
-         <div class="col-lg-7">
-            <img src="{{ github_stats.activity }}" alt="GitHub activity" class="img-fluid github-image">
+         <div class="col-md-6">
+            <div class="project-card">
+               <h4>Portfolio API</h4>
+               <p class="text-muted">Projects, skills, and case studies are exposed through JSON endpoints.</p>
+               <a class="link-light" href="{% url 'api_case_studies' %}">Open /api/case-studies/</a>
+            </div>
          </div>
       </div>
    </div>

@@ -6,9 +6,9 @@
       <div class="row align-items-center">
          <div class="col-lg-7" data-aos="fade-up">
             <p class="hero-eyebrow">{{ author_data.title }}</p>
-            <h1 class="hero-title">Building reliable backend systems for AI products and scalable APIs</h1>
+            <h1 class="hero-title">Scalable APIs, AI-enabled backend systems, and real-time platforms</h1>
             <p class="hero-subtitle">{{ author_data.hero_summary }}</p>
-            <p class="text-muted mb-4">{{ author_data.hero_strengths }}</p>
+            <p class="text-muted mb-3">{{ author_data.hero_strengths }}</p>
             <div class="tech-icons">
                <span><i class='bx bxl-python'></i>Python</span>
                <span><i class='bx bx-code-alt'></i>FastAPI</span>
@@ -22,6 +22,11 @@
                <a class="btn btn-outline-light hero-button" href="{% url 'contact' %}">Contact</a>
                <a class="btn btn-outline-light hero-button" href="{{ resume_url }}" target="_blank" rel="noopener">Download Resume</a>
             </div>
+            <div class="stack-chips mt-4">
+               {% for point in author_data.proof_points %}
+               <span>{{ point }}</span>
+               {% endfor %}
+            </div>
          </div>
          <div class="col-lg-5 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="150">
             <div class="hero-card">
@@ -34,8 +39,13 @@
                   <span>{{ item }}</span>
                   {% endfor %}
                </div>
+               <ul class="list-unstyled mt-3 mb-0">
+                  {% for result in featured_project.results|slice:":2" %}
+                  <li><span class='bx bx-check'></span> {{ result }}</li>
+                  {% endfor %}
+               </ul>
                <div class="hero-card-footer">
-                  <a class="link-light fw-semibold" href="{% url 'projects' %}">See full case study</a>
+                  <a class="link-light fw-semibold" href="{% url 'work_detail' featured_project.slug %}">See full case study</a>
                </div>
                {% else %}
                <p class="mb-0">Featured projects will appear here once added.</p>
@@ -67,6 +77,11 @@
                   <p><strong>Task:</strong> {{ project.problem }}</p>
                   <p><strong>What I did:</strong> {{ project.role }}</p>
                   <p>{{ project.description }}</p>
+                  <ul class="list-unstyled mb-3">
+                     {% for result in project.results|slice:":2" %}
+                     <li><span class='bx bx-check'></span> {{ result }}</li>
+                     {% endfor %}
+                  </ul>
                   <div class="stack-chips">
                      {% for item in project.stack %}
                      <span>{{ item }}</span>
@@ -138,53 +153,34 @@
    </div>
 </section>
 
-<section class="section">
-   <div class="container">
-      <div class="section-header">
-         <div>
-            <h2>GitHub Contributions</h2>
-            <p>Live contribution activity and stats.</p>
-         </div>
-      </div>
-      <div class="row g-4">
-         <div class="col-lg-5">
-            <img src="{{ github_stats.stats }}" alt="GitHub stats" class="img-fluid github-image">
-         </div>
-         <div class="col-lg-7">
-            <img src="{{ github_stats.activity }}" alt="GitHub activity" class="img-fluid github-image">
-         </div>
-      </div>
-   </div>
-</section>
-
 <section class="section pb-5">
    <div class="container">
       <div class="section-header">
          <div>
-            <h2>Availability & API</h2>
+            <h2>Backend Portfolio Highlights</h2>
             <p>{{ author_data.availability }}</p>
          </div>
       </div>
       <div class="row g-4">
          <div class="col-md-6 col-lg-4">
             <div class="project-card">
-               <h5>AI Assistant Ready</h5>
-               <p class="text-muted">Backend-first portfolio with AI integration extension points.</p>
+               <h5>Backend-First Portfolio</h5>
+               <p class="text-muted">Public content is exposed via JSON endpoints, reflecting a backend-first implementation approach.</p>
+               <a href="{% url 'api_projects' %}" class="link-light">/api/projects</a>
+            </div>
+         </div>
+         <div class="col-md-6 col-lg-4">
+            <div class="project-card">
+               <h5>Planned AI Extension</h5>
+               <p class="text-muted">Architecture-ready endpoint reserved for AI assistant integration in future iterations.</p>
                <a href="{% url 'api_ask_ai' %}" class="link-light">/api/ask-ai</a>
             </div>
          </div>
          <div class="col-md-6 col-lg-4">
             <div class="project-card">
-               <h5>ML Demo Ready</h5>
-               <p class="text-muted">Prepared endpoint structure for model-driven product demos.</p>
+               <h5>Planned ML Demo</h5>
+               <p class="text-muted">Reserved endpoint for future predictive demo workflows and model-serving examples.</p>
                <a href="{% url 'api_predict' %}" class="link-light">/api/predict</a>
-            </div>
-         </div>
-         <div class="col-md-6 col-lg-4">
-            <div class="project-card">
-               <h5>API-Ready Portfolio</h5>
-               <p class="text-muted">Public JSON endpoints expose projects, skills, and case studies.</p>
-               <a href="{% url 'api_projects' %}" class="link-light">/api/projects</a>
             </div>
          </div>
       </div>
