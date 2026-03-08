@@ -12,6 +12,7 @@ SECRET_KEY=replace-with-strong-secret
 ALLOWED_HOSTS=your-domain.com,www.your-domain.com,server-ip
 CSRF_TRUSTED_ORIGINS=https://your-domain.com,https://www.your-domain.com
 DATABASE_URL=postgresql://portfolio:strong-password@db:5432/portfolio
+DATABASE_SSL_REQUIRED=False
 POSTGRES_DB=portfolio
 POSTGRES_USER=portfolio
 POSTGRES_PASSWORD=strong-password
@@ -36,6 +37,13 @@ DATABASE_URL=
 
 ```bash
 docker compose up --build -d
+```
+
+If the app previously failed with `server does not support SSL, but SSL was required`, rebuild after updating `.env`:
+
+```bash
+docker compose down
+docker compose up -d --build
 ```
 
 Quick web-only start:

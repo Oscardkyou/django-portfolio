@@ -80,6 +80,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 
 database_url = get_env("DATABASE_URL")
+database_ssl_required = get_bool_env("DATABASE_SSL_REQUIRED", False)
 
 if database_url.startswith("postgres://") or database_url.startswith("postgresql://"):
     try:
@@ -88,7 +89,7 @@ if database_url.startswith("postgres://") or database_url.startswith("postgresql
         raise ImportError("dj-database-url is required when DATABASE_URL is set for PostgreSQL") from exc
 
     DATABASES = {
-        'default': dj_database_url.parse(database_url, conn_max_age=600, ssl_require=not DEBUG),
+        'default': dj_database_url.parse(database_url, conn_max_age=600, ssl_require=database_ssl_required),
     }
 else:
     DATABASES = {
