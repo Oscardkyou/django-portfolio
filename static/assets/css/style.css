@@ -655,6 +655,16 @@ body.theme-dark a:hover {
   color: var(--text-muted);
 }
 
+.hero-preview-list li {
+  margin-bottom: 0.65rem;
+  color: var(--text-muted);
+}
+
+.hero-preview-list li .bx {
+  color: var(--accent);
+  margin-right: 8px;
+}
+
 .hero-card,
 .project-card,
 .skill-card,

@@ -42,65 +42,103 @@
   const predictDuration = document.getElementById('predict-duration');
   const predictAiFeatures = document.getElementById('predict-ai-features');
 
+  const demoExperiments = [
+    {
+      name: 'logistics-price-model',
+      accuracy: 0.91,
+      model_version: 'v1.3',
+      stage: 'staging',
+    },
+    {
+      name: 'project-complexity-estimator',
+      accuracy: 0.87,
+      model_version: 'v0.9',
+      stage: 'demo',
+    },
+  ];
+
+  const getDemoChatAnswer = (message) => {
+    const normalizedMessage = message.toLowerCase();
+
+    if (normalizedMessage.includes('project') || normalizedMessage.includes('build')) {
+      return 'I built Gravora AI Knowledge Platform, a low-latency streaming backend, and backend-focused engineering case studies around scalable APIs and AI workflows.';
+    }
+
+    if (normalizedMessage.includes('stack') || normalizedMessage.includes('skill') || normalizedMessage.includes('technology')) {
+      return 'My core stack includes Python, FastAPI, Django, Docker, PostgreSQL, Redis, AWS, and AI-oriented backend architecture.';
+    }
+
+    if (normalizedMessage.includes('experience') || normalizedMessage.includes('about')) {
+      return 'I focus on backend engineering, AI integration, API design, and production-style systems for scalable products.';
+    }
+
+    if (normalizedMessage.includes('rag') || normalizedMessage.includes('ai')) {
+      return 'I use AI concepts in backend form: retrieval workflows, orchestration, model-facing APIs, and demo ML/MLOps endpoints.';
+    }
+
+    return 'Ask about my projects, stack, backend experience, or AI integrations.';
+  };
+
+  const getPredictionResult = (teamSize, durationMonths, aiFeatures) => {
+    let score = 0.2;
+    score += Math.min(teamSize, 10) * 0.05;
+    score += Math.min(durationMonths, 12) * 0.03;
+    if (aiFeatures) {
+      score += 0.25;
+    }
+
+    const complexityScore = Math.min(score, 0.99).toFixed(2);
+    let riskLevel = 'low';
+    let recommendedTeam = Math.max(teamSize, 2);
+
+    if (Number(complexityScore) >= 0.75) {
+      riskLevel = 'high';
+      recommendedTeam = Math.max(teamSize, 6);
+    } else if (Number(complexityScore) >= 0.45) {
+      riskLevel = 'medium';
+      recommendedTeam = Math.max(teamSize, 4);
+    }
+
+    return {
+      complexityScore,
+      riskLevel,
+      recommendedTeam,
+    };
+  };
+
   if (chatSubmit && chatInput && chatOutput) {
-    chatSubmit.addEventListener('click', async () => {
+    chatSubmit.addEventListener('click', () => {
       const message = chatInput.value.trim();
       if (!message) {
         chatOutput.textContent = 'Enter a question first.';
         return;
       }
 
-      chatOutput.textContent = 'Loading...';
-      const response = await fetch(chatSubmit.dataset.endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message }),
-      });
-      const data = await response.json();
-      chatOutput.textContent = data.answer || data.detail || 'No response received.';
+      chatOutput.textContent = getDemoChatAnswer(message);
     });
   }
 
   if (experimentsLoad && experimentsOutput) {
-    experimentsLoad.addEventListener('click', async () => {
-      experimentsOutput.textContent = 'Loading...';
-      const response = await fetch(experimentsLoad.dataset.endpoint);
-      const data = await response.json();
-      const experiments = data.experiments || [];
-      if (!experiments.length) {
-        experimentsOutput.textContent = 'No experiments found.';
-        return;
-      }
-      experimentsOutput.innerHTML = experiments.map((item) => (
+    experimentsLoad.addEventListener('click', () => {
+      experimentsOutput.innerHTML = demoExperiments.map((item) => (
         `<div class="ai-demo-item"><strong>${item.name}</strong><br>Accuracy: ${item.accuracy}<br>Version: ${item.model_version}<br>Stage: ${item.stage}</div>`
       )).join('');
     });
   }
 
   if (predictSubmit && predictOutput && predictTeamSize && predictDuration && predictAiFeatures) {
-    predictSubmit.addEventListener('click', async () => {
-      predictOutput.textContent = 'Loading...';
-      const payload = {
-        team_size: Number(predictTeamSize.value),
-        duration_months: Number(predictDuration.value),
-        ai_features: Boolean(predictAiFeatures.checked),
-      };
+    predictSubmit.addEventListener('click', () => {
+      const teamSize = Number(predictTeamSize.value);
+      const durationMonths = Number(predictDuration.value);
+      const aiFeatures = Boolean(predictAiFeatures.checked);
 
-      const response = await fetch(predictSubmit.dataset.endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-      const data = await response.json();
-      if (!response.ok) {
-        predictOutput.textContent = data.detail || 'Prediction failed.';
+      if (!teamSize || !durationMonths || teamSize < 1 || durationMonths < 1) {
+        predictOutput.textContent = 'Enter valid values for team size and duration.';
         return;
       }
-      predictOutput.innerHTML = `Complexity score: <strong>${data.complexity_score}</strong><br>Risk level: <strong>${data.risk_level}</strong><br>Recommended team: <strong>${data.recommended_team}</strong>`;
+
+      const result = getPredictionResult(teamSize, durationMonths, aiFeatures);
+      predictOutput.innerHTML = `Complexity score: <strong>${result.complexityScore}</strong><br>Risk level: <strong>${result.riskLevel}</strong><br>Recommended team: <strong>${result.recommendedTeam}</strong>`;
     });
   }
 

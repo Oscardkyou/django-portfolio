@@ -30,26 +30,73 @@
          </div>
          <div class="col-lg-5 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="150">
             <div class="hero-card">
-               <h3 class="h3 mb-3">{{ ui.featured_project }}</h3>
-               {% if featured_project %}
-               <p class="mb-2 fw-semibold">{{ featured_project.title }}</p>
-               <p class="mb-3 text-muted">{{ featured_project.summary }}</p>
+               <p class="hero-eyebrow mb-2">AI Demo</p>
+               <h3 class="h3 mb-3">Interactive backend + AI showcase</h3>
+               <p class="mb-3 text-muted">Test chat, experiments, and prediction workflows directly from the homepage.</p>
                <div class="stack-chips">
-                  {% for item in featured_project.stack %}
-                  <span>{{ item }}</span>
-                  {% endfor %}
+                  <span>LLM-style chat</span>
+                  <span>MLOps demo</span>
+                  <span>Prediction API</span>
                </div>
-               <ul class="list-unstyled mt-3 mb-0">
-                  {% for result in featured_project.results|slice:":2" %}
-                  <li><span class='bx bx-check'></span> {{ result }}</li>
-                  {% endfor %}
+               <ul class="list-unstyled mt-3 mb-0 hero-preview-list">
+                  <li><span class='bx bx-check'></span> Ask about projects and stack</li>
+                  <li><span class='bx bx-check'></span> Load experiment registry</li>
+                  <li><span class='bx bx-check'></span> Estimate project complexity</li>
                </ul>
                <div class="hero-card-footer">
-                  <a class="link-light fw-semibold" href="{% url 'work_detail' featured_project.slug %}?lang={{ lang }}">{{ ui.see_full_case }}</a>
+                  <a class="link-light fw-semibold" href="#ai-demo-section">Try AI Demo</a>
                </div>
-               {% else %}
-               <p class="mb-0">Featured projects will appear here once added.</p>
-               {% endif %}
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+<section class="section" id="ai-demo-section">
+   <div class="container">
+      <div class="section-header">
+         <div>
+            <h2>AI Demo</h2>
+            <p>Three backend-facing demo endpoints that showcase LLM-style chat, ML experiment tracking, and prediction workflows.</p>
+         </div>
+      </div>
+      <div class="row g-4">
+         <div class="col-md-6 col-lg-4">
+            <div class="project-card">
+               <h5>AI Chat</h5>
+               <p class="text-muted">Ask about my projects, skills, and engineering experience directly on the page.</p>
+               <div class="ai-demo-form">
+                  <label class="form-label" for="ai-chat-input">Ask about my experience</label>
+                  <textarea class="form-control" id="ai-chat-input" rows="4" placeholder="What projects did you build?"></textarea>
+                  <button type="button" class="btn btn-primary mt-3 w-100" id="ai-chat-submit" data-endpoint="{% url 'api_ai_chat' %}">Ask AI</button>
+               </div>
+               <div class="ai-demo-output mt-3" id="ai-chat-output">Response will appear here.</div>
+            </div>
+         </div>
+         <div class="col-md-6 col-lg-4">
+            <div class="project-card">
+               <h5>ML Experiments</h5>
+               <p class="text-muted">Load experiment registry data with model names, accuracy, version, and stage metadata.</p>
+               <button type="button" class="btn btn-outline-light w-100" id="ai-experiments-load" data-endpoint="{% url 'api_ai_experiments' %}">Load experiments</button>
+               <div class="ai-demo-output mt-3" id="ai-experiments-output">Experiments will appear here.</div>
+            </div>
+         </div>
+         <div class="col-md-6 col-lg-4">
+            <div class="project-card">
+               <h5>Prediction Demo</h5>
+               <p class="text-muted">Estimate project complexity using simple delivery inputs.</p>
+               <div class="ai-demo-form">
+                  <label class="form-label" for="predict-team-size">Team size</label>
+                  <input class="form-control" id="predict-team-size" type="number" min="1" value="3">
+                  <label class="form-label mt-3" for="predict-duration">Duration (months)</label>
+                  <input class="form-control" id="predict-duration" type="number" min="1" value="6">
+                  <div class="form-check mt-3">
+                     <input class="form-check-input" type="checkbox" id="predict-ai-features" checked>
+                     <label class="form-check-label" for="predict-ai-features">Includes AI features</label>
+                  </div>
+                  <button type="button" class="btn btn-primary mt-3 w-100" id="ai-predict-submit" data-endpoint="{% url 'api_ai_predict' %}">Run prediction</button>
+               </div>
+               <div class="ai-demo-output mt-3" id="ai-predict-output">Prediction result will appear here.</div>
             </div>
          </div>
       </div>
@@ -153,54 +200,4 @@
    </div>
 </section>
 
-<section class="section pb-5">
-   <div class="container">
-      <div class="section-header">
-         <div>
-            <h2>AI Demo</h2>
-            <p>Three backend-facing demo endpoints that showcase LLM-style chat, ML experiment tracking, and prediction workflows.</p>
-         </div>
-      </div>
-      <div class="row g-4">
-         <div class="col-md-6 col-lg-4">
-            <div class="project-card">
-               <h5>AI Chat</h5>
-               <p class="text-muted">Ask about my projects, skills, and engineering experience directly on the page.</p>
-               <div class="ai-demo-form">
-                  <label class="form-label" for="ai-chat-input">Ask about my experience</label>
-                  <textarea class="form-control" id="ai-chat-input" rows="4" placeholder="What projects did you build?"></textarea>
-                  <button type="button" class="btn btn-primary mt-3 w-100" id="ai-chat-submit" data-endpoint="{% url 'api_ai_chat' %}">Ask AI</button>
-               </div>
-               <div class="ai-demo-output mt-3" id="ai-chat-output">Response will appear here.</div>
-            </div>
-         </div>
-         <div class="col-md-6 col-lg-4">
-            <div class="project-card">
-               <h5>ML Experiments</h5>
-               <p class="text-muted">Load experiment registry data with model names, accuracy, version, and stage metadata.</p>
-               <button type="button" class="btn btn-outline-light w-100" id="ai-experiments-load" data-endpoint="{% url 'api_ai_experiments' %}">Load experiments</button>
-               <div class="ai-demo-output mt-3" id="ai-experiments-output">Experiments will appear here.</div>
-            </div>
-         </div>
-         <div class="col-md-6 col-lg-4">
-            <div class="project-card">
-               <h5>Prediction Demo</h5>
-               <p class="text-muted">Estimate project complexity using simple delivery inputs.</p>
-               <div class="ai-demo-form">
-                  <label class="form-label" for="predict-team-size">Team size</label>
-                  <input class="form-control" id="predict-team-size" type="number" min="1" value="3">
-                  <label class="form-label mt-3" for="predict-duration">Duration (months)</label>
-                  <input class="form-control" id="predict-duration" type="number" min="1" value="6">
-                  <div class="form-check mt-3">
-                     <input class="form-check-input" type="checkbox" id="predict-ai-features" checked>
-                     <label class="form-check-label" for="predict-ai-features">Includes AI features</label>
-                  </div>
-                  <button type="button" class="btn btn-primary mt-3 w-100" id="ai-predict-submit" data-endpoint="{% url 'api_ai_predict' %}">Run prediction</button>
-               </div>
-               <div class="ai-demo-output mt-3" id="ai-predict-output">Prediction result will appear here.</div>
-            </div>
-         </div>
-      </div>
-   </div>
-</section>
 {% endblock %}
