@@ -2,12 +2,13 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 from typing import Final
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 LOGGER = logging.getLogger(__name__)
-OLLAMA_URL: Final[str] = "http://127.0.0.1:11434/api/generate"
+OLLAMA_URL: Final[str] = os.getenv("OLLAMA_URL", "http://host.docker.internal:11434/api/generate").strip()
 OLLAMA_MODEL: Final[str] = "tinyllama"
 AI_UNAVAILABLE_MESSAGE: Final[str] = "AI assistant is temporarily unavailable"
 

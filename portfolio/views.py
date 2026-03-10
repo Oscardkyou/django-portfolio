@@ -6,6 +6,7 @@ from ai.ollama_service import AI_UNAVAILABLE_MESSAGE, ask_ai
 from django.core.cache import cache
 from django.contrib import messages
 from django.views.decorators.http import require_GET, require_POST
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 
@@ -259,6 +260,7 @@ def api_case_studies(request: HttpRequest) -> JsonResponse:
     return JsonResponse({"lang": lang, "case_studies": _localized_copy(_get_case_studies(), lang)})
 
 
+@csrf_exempt
 @require_POST
 def api_ai_chat(request: HttpRequest) -> JsonResponse:
     try:
