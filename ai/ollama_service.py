@@ -1,10 +1,10 @@
 from __future__ import annotations
 
+import json
 import logging
 from typing import Final
-
-import requests
-from requests import RequestException
+from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 
 LOGGER = logging.getLogger(__name__)
 OLLAMA_URL: Final[str] = "http://127.0.0.1:11434/api/generate"
@@ -43,22 +43,27 @@ User question: {message.strip()}
 
 def ask_ai(message: str, language: str = "en") -> str:
     prompt = _build_prompt(message=message, language=language)
+    payload = json.dumps(
+        {
+            "model": OLLAMA_MODEL,
+            "prompt": prompt,
+            "stream": False,
+        }
+    ).encode("utf-8")
+    request = Request(
+        OLLAMA_URL,
+        data=payload,
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
 
     try:
-        response = requests.post(
-            OLLAMA_URL,
-            json={
-                "model": OLLAMA_MODEL,
-                "prompt": prompt,
-                "stream": False,
-            },
-            timeout=60,
-        )
-        response.raise_for_status()
-        payload = response.json()
-    except (RequestException, ValueError) as exc:
+        with urlopen(request, timeout=60) as response:
+            response_body = response.read().decode("utf-8")
+        response_payload = json.loads(response_body)
+    except (HTTPError, URLError, TimeoutError, ValueError) as exc:
         LOGGER.warning("Ollama request failed", exc_info=exc)
         return AI_UNAVAILABLE_MESSAGE
 
-    answer = str(payload.get("response", "")).strip()
+    answer = str(response_payload.get("response", "")).strip()
     return answer or AI_UNAVAILABLE_MESSAGE
