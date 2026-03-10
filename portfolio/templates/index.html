@@ -205,48 +205,36 @@
             </div>
          </div>
       </div>
-      <div class="row g-4">
-         <div class="col-md-6 col-lg-4">
-            <div class="project-card">
-               <h5>Self-Hosted AI Assistant</h5>
-               <p class="text-muted">Portfolio-aware assistant connected to a local model through a Django backend endpoint.</p>
+      <div class="row justify-content-center">
+         <div class="col-lg-8">
+            <div class="project-card ai-chat-card">
+               <div class="ai-chat-card-header">
+                  <div>
+                     <h5>Self-Hosted AI Assistant</h5>
+                     <p class="text-muted mb-0">Portfolio-aware assistant connected to a local `tinyllama` model through a Django backend endpoint.</p>
+                  </div>
+                  <div class="ai-chat-avatar">
+                     <span class='bx bx-bot'></span>
+                  </div>
+               </div>
                <div class="stack-chips mb-3">
                   <button type="button" class="btn btn-outline-light btn-sm ai-suggested-question" data-question="What projects did Dauren build?">Projects</button>
                   <button type="button" class="btn btn-outline-light btn-sm ai-suggested-question" data-question="What is Dauren's main stack?">Stack</button>
                   <button type="button" class="btn btn-outline-light btn-sm ai-suggested-question" data-question="Tell me about Dauren's RAG experience.">RAG</button>
                </div>
-               <div class="ai-demo-form">
-                  <label class="form-label" for="ai-chat-input">Ask about projects, stack, or AI experience</label>
-                  <input class="form-control" id="ai-chat-input" type="text" placeholder="What projects did Dauren build?">
-                  <button type="button" class="btn btn-primary mt-3 w-100" id="ai-chat-submit" data-endpoint="{% url 'api_ai_chat' %}">Ask AI</button>
-               </div>
-               <div class="ai-demo-output mt-3" id="ai-chat-output">Response will appear here.</div>
-            </div>
-         </div>
-         <div class="col-md-6 col-lg-4">
-            <div class="project-card">
-               <h5>ML Experiments</h5>
-               <p class="text-muted">Load experiment registry data with model names, accuracy, version, and stage metadata.</p>
-               <button type="button" class="btn btn-outline-light w-100" id="ai-experiments-load" data-endpoint="{% url 'api_ai_experiments' %}">Load experiments</button>
-               <div class="ai-demo-output mt-3" id="ai-experiments-output">Experiments will appear here.</div>
-            </div>
-         </div>
-         <div class="col-md-6 col-lg-4">
-            <div class="project-card">
-               <h5>Prediction Demo</h5>
-               <p class="text-muted">Estimate project complexity using simple delivery inputs.</p>
-               <div class="ai-demo-form">
-                  <label class="form-label" for="predict-team-size">Team size</label>
-                  <input class="form-control" id="predict-team-size" type="number" min="1" value="3">
-                  <label class="form-label mt-3" for="predict-duration">Duration (months)</label>
-                  <input class="form-control" id="predict-duration" type="number" min="1" value="6">
-                  <div class="form-check mt-3">
-                     <input class="form-check-input" type="checkbox" id="predict-ai-features" checked>
-                     <label class="form-check-label" for="predict-ai-features">Includes AI features</label>
+               <div class="ai-chat-window">
+                  <div class="ai-chat-message ai-chat-message-bot">
+                     Ask about projects, backend architecture, or AI integration experience.
                   </div>
-                  <button type="button" class="btn btn-primary mt-3 w-100" id="ai-predict-submit" data-endpoint="{% url 'api_ai_predict' %}">Run prediction</button>
+                  <div class="ai-demo-output ai-chat-response" id="ai-chat-output">Response will appear here.</div>
                </div>
-               <div class="ai-demo-output mt-3" id="ai-predict-output">Prediction result will appear here.</div>
+               <div class="ai-demo-form mt-3">
+                  <label class="form-label" for="ai-chat-input">Ask about projects, stack, or AI experience</label>
+                  <div class="ai-chat-controls">
+                     <input class="form-control" id="ai-chat-input" type="text" placeholder="What projects did Dauren build?">
+                     <button type="button" class="btn btn-primary" id="ai-chat-submit" data-endpoint="{% url 'api_ai_chat' %}">Ask AI</button>
+                  </div>
+               </div>
             </div>
          </div>
       </div>
