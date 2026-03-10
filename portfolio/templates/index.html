@@ -189,22 +189,34 @@
    <div class="container">
       <div class="section-header">
          <div>
-            <h2>Interactive AI Demo</h2>
-            <p>Optional technical demo with chat, ML experiment samples, and project complexity prediction.</p>
+            <h2>AI Integration Demo</h2>
+            <p>Self-hosted assistant and backend-facing AI examples built to demonstrate practical product integration, not just UI polish.</p>
+         </div>
+      </div>
+      <div class="ai-demo-intro">
+         <div class="ai-demo-intro-card">
+            <h5>What this demonstrates</h5>
+            <p class="mb-2">This section shows a lightweight AI integration pattern for real products: a web UI, Django API endpoints, backend validation, rate limiting, and a self-hosted model connection.</p>
+            <div class="stack-chips">
+               <span>Self-hosted Ollama</span>
+               <span>Django API</span>
+               <span>Rate limited</span>
+               <span>RU/EN aware</span>
+            </div>
          </div>
       </div>
       <div class="row g-4">
          <div class="col-md-6 col-lg-4">
             <div class="project-card">
-               <h5>AI Assistant</h5>
-               <p class="text-muted">Ask about my experience.</p>
+               <h5>Self-Hosted AI Assistant</h5>
+               <p class="text-muted">Portfolio-aware assistant connected to a local model through a Django backend endpoint.</p>
                <div class="stack-chips mb-3">
                   <button type="button" class="btn btn-outline-light btn-sm ai-suggested-question" data-question="What projects did Dauren build?">Projects</button>
                   <button type="button" class="btn btn-outline-light btn-sm ai-suggested-question" data-question="What is Dauren's main stack?">Stack</button>
                   <button type="button" class="btn btn-outline-light btn-sm ai-suggested-question" data-question="Tell me about Dauren's RAG experience.">RAG</button>
                </div>
                <div class="ai-demo-form">
-                  <label class="form-label" for="ai-chat-input">Ask about my experience</label>
+                  <label class="form-label" for="ai-chat-input">Ask about projects, stack, or AI experience</label>
                   <input class="form-control" id="ai-chat-input" type="text" placeholder="What projects did Dauren build?">
                   <button type="button" class="btn btn-primary mt-3 w-100" id="ai-chat-submit" data-endpoint="{% url 'api_ai_chat' %}">Ask AI</button>
                </div>

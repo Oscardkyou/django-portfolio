@@ -773,6 +773,27 @@ body.theme-dark a:hover {
   font-size: 14px;
 }
 
+.ai-demo-intro {
+  margin-bottom: 1.5rem;
+}
+
+.ai-demo-intro-card {
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  padding: 20px 24px;
+}
+
+.ai-demo-intro-card h5 {
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+}
+
+.ai-demo-intro-card p {
+  color: var(--text-muted);
+  max-width: 880px;
+}
+
 .ai-demo-output {
   min-height: 96px;
   background: rgba(15, 23, 42, 0.55);

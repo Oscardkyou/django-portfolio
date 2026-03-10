@@ -11,6 +11,7 @@ LOGGER = logging.getLogger(__name__)
 OLLAMA_URL: Final[str] = os.getenv("OLLAMA_URL", "http://host.docker.internal:11434/api/generate").strip()
 OLLAMA_MODEL: Final[str] = "tinyllama"
 AI_UNAVAILABLE_MESSAGE: Final[str] = "AI assistant is temporarily unavailable"
+OLLAMA_TIMEOUT_SECONDS: Final[int] = 8
 
 
 def _build_prompt(message: str, language: str) -> str:
@@ -59,11 +60,11 @@ def ask_ai(message: str, language: str = "en") -> str:
     )
 
     try:
-        with urlopen(request, timeout=60) as response:
+        with urlopen(request, timeout=OLLAMA_TIMEOUT_SECONDS) as response:
             response_body = response.read().decode("utf-8")
         response_payload = json.loads(response_body)
     except (HTTPError, URLError, TimeoutError, ValueError) as exc:
-        LOGGER.warning("Ollama request failed", exc_info=exc)
+        LOGGER.warning("Ollama request failed", extra={"ollama_url": OLLAMA_URL}, exc_info=exc)
         return AI_UNAVAILABLE_MESSAGE
 
     answer = str(response_payload.get("response", "")).strip()
