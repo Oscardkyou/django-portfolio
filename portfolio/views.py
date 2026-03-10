@@ -2,6 +2,8 @@ import json
 from copy import deepcopy
 from typing import Any, Dict, List, Optional, Tuple
 
+from ai.ollama_service import AI_UNAVAILABLE_MESSAGE, ask_ai
+from django.core.cache import cache
 from django.contrib import messages
 from django.views.decorators.http import require_GET, require_POST
 from django.http import HttpRequest, HttpResponse, JsonResponse
@@ -9,10 +11,12 @@ from django.shortcuts import redirect, render
 
 from .data import AUTHOR, BLOG_POSTS, CASE_STUDIES, GITHUB_STATS, PERFORMANCE, PROJECTS, RESUME_URL, SKILLS, UI_TEXT
 from .models import Message
-from .services import AskAIService, ExperimentService, PredictService
+from .services import ExperimentService, PredictService
 
 
 SUPPORTED_LANGUAGES = ("en", "ru")
+AI_CHAT_RATE_LIMIT = 2
+AI_CHAT_RATE_WINDOW_SECONDS = 60
 
 
 def _get_language(request: HttpRequest) -> str:
@@ -75,6 +79,32 @@ def _get_skills() -> List[Dict[str, str]]:
 def _get_author_context(request: HttpRequest) -> Tuple[None, Dict[str, Any], List[Dict[str, str]], Optional[str]]:
     lang = _get_language(request)
     return None, _localized_copy(AUTHOR, lang), _localized_copy(SKILLS, lang), None
+
+
+def _get_client_ip(request: HttpRequest) -> str:
+    forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR", "")
+    if forwarded_for:
+        return forwarded_for.split(",")[0].strip()
+    return request.META.get("REMOTE_ADDR", "unknown")
+
+
+def _enforce_ai_rate_limit(request: HttpRequest, scope: str) -> Optional[JsonResponse]:
+    ip_address = _get_client_ip(request)
+    cache_key = f"ai_rate_limit:{scope}:{ip_address}"
+    request_count = cache.get(cache_key, 0)
+
+    if request_count >= AI_CHAT_RATE_LIMIT:
+        return JsonResponse(
+            {"answer": AI_UNAVAILABLE_MESSAGE, "detail": "Rate limit exceeded."},
+            status=429,
+        )
+
+    if request_count == 0:
+        cache.set(cache_key, 1, timeout=AI_CHAT_RATE_WINDOW_SECONDS)
+    else:
+        cache.incr(cache_key)
+
+    return None
 
 def index(request: HttpRequest) -> HttpResponse:
     _, author_data, _, _ = _get_author_context(request)
@@ -231,20 +261,38 @@ def api_case_studies(request: HttpRequest) -> JsonResponse:
 
 @require_POST
 def api_ai_chat(request: HttpRequest) -> JsonResponse:
-    payload = json.loads(request.body or "{}") if request.body else {}
+    try:
+        payload = json.loads(request.body or "{}") if request.body else {}
+    except json.JSONDecodeError:
+        return JsonResponse({"detail": "Invalid JSON payload."}, status=400)
+
     message = str(payload.get("message", "")).strip()
     if not message:
         return JsonResponse({"detail": "Field 'message' is required."}, status=400)
-    return JsonResponse(AskAIService.build_answer(message))
+
+    rate_limit_response = _enforce_ai_rate_limit(request, "chat")
+    if rate_limit_response is not None:
+        return rate_limit_response
+
+    answer = ask_ai(message=message, language=_get_language(request))
+    return JsonResponse({"answer": answer})
 
 
 @require_GET
 def api_ai_experiments(request: HttpRequest) -> JsonResponse:
+    rate_limit_response = _enforce_ai_rate_limit(request, "experiments")
+    if rate_limit_response is not None:
+        return rate_limit_response
+
     return JsonResponse(ExperimentService.list_experiments())
 
 
 @require_POST
 def api_ai_predict(request: HttpRequest) -> JsonResponse:
+    rate_limit_response = _enforce_ai_rate_limit(request, "predict")
+    if rate_limit_response is not None:
+        return rate_limit_response
+
     payload = json.loads(request.body or "{}") if request.body else {}
     try:
         team_size = int(payload.get("team_size", 0))

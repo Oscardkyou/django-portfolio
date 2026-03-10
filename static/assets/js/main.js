@@ -34,6 +34,7 @@
   const chatInput = document.getElementById('ai-chat-input');
   const chatSubmit = document.getElementById('ai-chat-submit');
   const chatOutput = document.getElementById('ai-chat-output');
+  const suggestedQuestions = document.querySelectorAll('.ai-suggested-question');
   const experimentsLoad = document.getElementById('ai-experiments-load');
   const experimentsOutput = document.getElementById('ai-experiments-output');
   const predictSubmit = document.getElementById('ai-predict-submit');
@@ -56,28 +57,6 @@
       stage: 'demo',
     },
   ];
-
-  const getDemoChatAnswer = (message) => {
-    const normalizedMessage = message.toLowerCase();
-
-    if (normalizedMessage.includes('project') || normalizedMessage.includes('build')) {
-      return 'I built Gravora AI Knowledge Platform, a low-latency streaming backend, and backend-focused engineering case studies around scalable APIs and AI workflows.';
-    }
-
-    if (normalizedMessage.includes('stack') || normalizedMessage.includes('skill') || normalizedMessage.includes('technology')) {
-      return 'My core stack includes Python, FastAPI, Django, Docker, PostgreSQL, Redis, AWS, and AI-oriented backend architecture.';
-    }
-
-    if (normalizedMessage.includes('experience') || normalizedMessage.includes('about')) {
-      return 'I focus on backend engineering, AI integration, API design, and production-style systems for scalable products.';
-    }
-
-    if (normalizedMessage.includes('rag') || normalizedMessage.includes('ai')) {
-      return 'I use AI concepts in backend form: retrieval workflows, orchestration, model-facing APIs, and demo ML/MLOps endpoints.';
-    }
-
-    return 'Ask about my projects, stack, backend experience, or AI integrations.';
-  };
 
   const getPredictionResult = (teamSize, durationMonths, aiFeatures) => {
     let score = 0.2;
@@ -107,14 +86,44 @@
   };
 
   if (chatSubmit && chatInput && chatOutput) {
-    chatSubmit.addEventListener('click', () => {
+    chatSubmit.addEventListener('click', async () => {
       const message = chatInput.value.trim();
       if (!message) {
         chatOutput.textContent = 'Enter a question first.';
         return;
       }
 
-      chatOutput.textContent = getDemoChatAnswer(message);
+      const endpoint = chatSubmit.dataset.endpoint;
+      chatOutput.textContent = 'Thinking...';
+      chatSubmit.disabled = true;
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            message,
+          }),
+        });
+
+        const data = await response.json();
+        chatOutput.textContent = data.answer || data.detail || 'AI assistant is temporarily unavailable';
+      } catch (error) {
+        chatOutput.textContent = 'AI assistant is temporarily unavailable';
+      } finally {
+        chatSubmit.disabled = false;
+      }
+    });
+  }
+
+  if (suggestedQuestions.length && chatInput && chatSubmit) {
+    suggestedQuestions.forEach((button) => {
+      button.addEventListener('click', () => {
+        chatInput.value = button.dataset.question || '';
+        chatSubmit.click();
+      });
     });
   }
 
